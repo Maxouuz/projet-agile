@@ -9,7 +9,7 @@ public class lineDisplacement {
         int playerPosition = 0;
         l.print(playerPosition);
 
-        playerPosition+=1;
+        playerPosition+=11;
         System.out.println("MOUVEMENT");
         l.print(playerPosition);
     }
