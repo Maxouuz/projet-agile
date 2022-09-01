@@ -1,13 +1,15 @@
 package ZombIUT;
 
 public class Player {
+	private final String NAME;
 	private final static int MAXWATERLVL = 5;
 	private int waterLvl;
 	private boolean isThirsty;
 	private Inventory inventory;
 	private Coordonates position;
 	
-	public Player() {
+	public Player(String name) {
+		NAME = name;
 		isThirsty = false;
 		waterLvl = MAXWATERLVL;
 		inventory = new Inventory();
@@ -28,7 +30,10 @@ public class Player {
 			isThirsty = true;
 	}
 	
+	//TODO
+	public void dispInventory() {
 	
+	}
 	
 	public void dispWaterLvl() {
 		for(int i = 0 ; i < waterLvl ; i++)
