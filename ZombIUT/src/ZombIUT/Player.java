@@ -34,6 +34,10 @@ public class Player {
 		position.setX(x);
 		position.setY(y);
 	}
+
+	public Coordonates getPosition() {
+		return position;
+	}
 	
 	public void setPosition(Coordonates other) {
 		position = other;
@@ -48,4 +52,12 @@ public class Player {
 		for(int i = 0 ; i < waterLvl ; i++)
 			System.out.println("💧");
 	}
+
+	@Override
+	public String toString() {
+		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", isThirsty=" + isThirsty + ", inventory="
+				+ inventory + ", position=" + position + "]";
+	}
+	
+	
 }
