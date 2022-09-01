@@ -15,7 +15,7 @@ public class Lane {
             //Random randObject = new Random();
             randPres.doubles(0,1);
             if(randPres.equals(0)){
-                stuff.add(" ");
+                stuff.add("    ");
             }else {
                 //randObject.doubles
                 stuff.add("/");
