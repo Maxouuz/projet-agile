@@ -34,6 +34,10 @@ public class Player {
 		position.setX(x);
 		position.setY(y);
 	}
+
+	public Coordonates getPosition() {
+		return position;
+	}
 	
 	public void setPosition(Coordonates other) {
 		position = other;
