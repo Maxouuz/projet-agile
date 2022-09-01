@@ -52,4 +52,12 @@ public class Player {
 		for(int i = 0 ; i < waterLvl ; i++)
 			System.out.println("💧");
 	}
+
+	@Override
+	public String toString() {
+		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", isThirsty=" + isThirsty + ", inventory="
+				+ inventory + ", position=" + position + "]";
+	}
+	
+	
 }
