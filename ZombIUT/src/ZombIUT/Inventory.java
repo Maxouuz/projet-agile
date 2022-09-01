@@ -3,7 +3,8 @@ package ZombIUT;
 import java.util.HashMap;
 
 public class Inventory {
-	HashMap<Ressources, Integer> inventory = new HashMap();
+
+	HashMap<Ressources, Integer> inventory;
 	
 	public Inventory() {
 		inventory = new HashMap();
@@ -22,7 +23,6 @@ public class Inventory {
 	public void affichage () {
 		inventory.forEach((key, value) -> {
 			System.out.print("Vous avez: " + value + " de " + key);
-			
 		});
 	}
 	
