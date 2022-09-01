@@ -30,6 +30,19 @@ public class Player {
 			isThirsty = true;
 	}
 	
+	public void setPosition(int x, int y) {
+		position.setX(x);
+		position.setY(y);
+	}
+
+	public Coordonates getPosition() {
+		return position;
+	}
+	
+	public void setPosition(Coordonates other) {
+		position = other;
+	}
+	
 	//TODO
 	public void dispInventory() {
 	
