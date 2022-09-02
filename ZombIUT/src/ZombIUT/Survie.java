@@ -1,6 +1,7 @@
 package ZombIUT;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Survie {
 	private static int jour = 1;
@@ -8,34 +9,55 @@ public class Survie {
 
 
 	public static void play(Player p){
+		int x;
 		boolean dead=false;
 		int choix = 0;
+		int dayWithoutDrink = 0;
 		while(!dead) {
 			// Choix d'action
+			Menu.clearScreen();
 			System.out.println("Jour :"+jour);
 			System.out.println("Votre Status :");
 			// afficher les barres
-			System.out.println("A soif :"+p.isThirsty());
-			System.out.println("A Faim :"+p.isThirsty());
-			//	System.out.println("Inventaire :"+p.dispInventory());
+			p.dispWaterLvl();
+			p.dispHungerLvl();
+//			p.dispRadioactivityLvl();
+//			p.dispSanityLvl();
+			
+//			System.out.println("A soif :"+p.isThirsty());
+//			System.out.println("A Faim :"+p.isStarving());
+			
+			if(p.isStarving()) {
+				System.out.println("Il a faim");
+			}
+		    if(p.isThirsty()) {
+		    	System.out.println("Il a soif");
+		    }
+			
+			System.out.println("Inventaire :");
+			p.dispInventory();
 			System.out.println();
 			System.out.println("Voulez-vous manger ? 1: Oui 2: Non");
+			
+
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
-				
+				p.isEating();
 			} else {
 
 			}
 
-			// Choix de sorti
+			// Choix de sortie
 			System.out.println("Voulez-vous boire ? 1: Oui 2: Non");
 
 			choix = Survie.saisie1ou2();
 			if(choix=='1') {
-
+				p.isDrinking();
 			} else {
-				p.dayPast();
+				if(p.getWaterLvl() == 0) {
+					dayWithoutDrink++;
+				}
 			}
 			
 			System.out.println("Voulez-vous sortir ? 1: Oui 2: Non");
@@ -43,14 +65,26 @@ public class Survie {
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
-
-			} else {
-
+				// Choix evenement
+				System.out.println("La porte est bloqué");
 			}
+			
+			System.out.println("La nuit tombe");
 
+			try {
+				TimeUnit.SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			p.dayPast();
 			jour++;
-
-
+			
+			if(p.getWaterLvl() == 0 && dayWithoutDrink == 3) {
+				dead=true;
+				System.out.println("Vous êtes mort le jour :"+jour);
+			}
 		}
 
 

@@ -143,6 +143,18 @@ public class Player {
 		System.out.println();
 	}
 
+	public void isEating() {
+		if (hungerLvl != MAXHUNGERLVL) {
+			hungerLvl = hungerLvl + 2;
+		}
+	}
+
+	public void isDrinking() {
+		if (waterLvl != MAXWATERLVL) {
+			waterLvl = waterLvl + 2;
+		}
+	}
+
 	public void savingScores(String location) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(location))) {
 			bw.write(name + " à survécu : " + getDaysSurvived() + "Jours.");
