@@ -19,6 +19,7 @@ public class Menu {
 	public static int menu() {
 		int x;
 		boolean ff = true;
+		
 		while(ff) {
 			x=0;
 			MenuDuDebut();
