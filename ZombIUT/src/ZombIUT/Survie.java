@@ -78,7 +78,7 @@ public class Survie {
 				e.printStackTrace();
 			}
 			
-			p.dayPast();
+			p.dayPass();
 			jour++;
 			
 			if(p.getWaterLvl() == 0 && dayWithoutDrink == 3) {

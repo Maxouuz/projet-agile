@@ -67,7 +67,11 @@ public class Player {
 		this.inventory = inventory;
 	}
 
-	public void dayPast() {
+	public String getName() {
+		return NAME;
+	}
+	
+	public void dayPass() {
 		if(waterLvl>0) {
 			waterLvl -= 1;
 		}
@@ -109,7 +113,6 @@ public class Player {
 		position = other;
 	}
 
-	// TODO
 	public void dispInventory() {
 		inventory.affichage();
 	}
@@ -145,15 +148,15 @@ public class Player {
 	}
 	
 	public void isEating() {
-		//if(hungerLvl!=MAXHUNGERLVL) {
-			hungerLvl=hungerLvl+2;
-		//} 
+		if(hungerLvl<=MAXHUNGERLVL) {
+			hungerLvl=hungerLvl+1;
+		} 
 	}
 	
 	public void isDrinking() {
-		//if(waterLvl!=MAXWATERLVL) {
-			waterLvl=waterLvl+2;
-		//} 
+		if(waterLvl<=MAXWATERLVL) {
+			waterLvl=waterLvl+1;
+		} 
 	}
 
 	@Override
