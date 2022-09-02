@@ -1,12 +1,24 @@
 package ZombIUT;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+
 public class Player {
-	private final String NAME;
+	private String name;
 	private final static int MAXWATERLVL = 5;
 	private final static int MAXHUNGERLVL = 5;
 	private final static int MAXHEALTLVL = 5;
 	private final static int MAXSANITYLVL = 5;
 	private final static int MAXRADIOACTIVITYLVL = 5;
+	private int daysSurvived;
 	private int waterLvl;
 	private int hungerLvl;
 	private int healtLvl;
@@ -18,7 +30,8 @@ public class Player {
 	private Coordonates position;
 
 	public Player(String name) {
-		NAME = name;
+		this.name = name;
+		daysSurvived = 0;
 		isThirsty = false;
 		isStarving = false;
 		waterLvl = MAXWATERLVL;
@@ -42,6 +55,10 @@ public class Player {
 		return healtLvl;
 	}
 
+	public int getDaysSurvived() {
+		return daysSurvived;
+	}
+
 	public int getHungerLvl() {
 		return hungerLvl;
 	}
@@ -62,6 +79,7 @@ public class Player {
 		waterLvl -= 1;
 		hungerLvl -= 1;
 		sanityLvl -= 1;
+		daysSurvived += 1;
 		if (waterLvl < 3)
 			isThirsty = true;
 		if (hungerLvl < 3)
@@ -72,7 +90,7 @@ public class Player {
 		if (sanityLvl == 0) {
 			healtLvl -= 1;
 		}
-		if(radioactivityLvl == 5) {
+		if (radioactivityLvl == 5) {
 			healtLvl -= 1;
 		}
 	}
@@ -125,9 +143,34 @@ public class Player {
 		System.out.println();
 	}
 
+	public void savingScores(String location) {
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(location))) {
+			bw.write(name + " à survécu : " + getDaysSurvived() + "Jours.");
+			bw.newLine();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void loadingScores(String location) {
+		try (BufferedReader br = new BufferedReader(new FileReader(location))) {
+			String line = br.readLine();
+			while (line != null) {
+				System.out.println(line);
+				line = br.readLine();
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found: " + e.getMessage());
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Reading error: " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public String toString() {
-		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
+		return "Player [NAME=" + name + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
