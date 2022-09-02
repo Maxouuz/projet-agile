@@ -54,6 +54,17 @@ public class Lane {
         }
     }
     
+    protected void pick (Coordonates playerPosition, Inventory inventaire) {
+        if( !stuff.get(playerPosition.getX()).equals("   ")) {
+            if(inventaire.sameObject(Ressources.valueOf(stuff.get(playerPosition.getX()).toString()))) {
+                inventaire.add(Ressources.valueOf(stuff.get(playerPosition.getX()).toString()),1);
+            }else {
+                inventaire.add(Ressources.valueOf(stuff.get(playerPosition.getX()).toString()),+1);
+            }
+
+        }
+    }
+    
     protected void print(Coordonates playerPosition) {
     	System.out.print("|");
         for (int i =0; i<SIZE; i++) {
@@ -72,5 +83,5 @@ public class Lane {
         
     }
    
-    
+   
 }

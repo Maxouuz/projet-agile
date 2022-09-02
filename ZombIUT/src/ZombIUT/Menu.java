@@ -42,6 +42,7 @@ public class Menu {
 				// mettre le jeu
 				clearScreen();
 				lineDisplacement.play();
+				Survie.play(p);
 
 			} else if (x=='2') {
 				regle();
