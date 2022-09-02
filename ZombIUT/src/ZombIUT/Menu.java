@@ -29,7 +29,7 @@ public class Menu {
 			System.out.println("Choix:");
 
 
-			while(x!=1 && x!=2 && x!=3) {    
+			while(x!=1 && x!=2 && x!=3 && x!=4 && x!=5) {    
 				x = sc.nextInt();
 			} 
 
@@ -42,12 +42,16 @@ public class Menu {
 				Player p = new Player(name);
 				System.out.println(p);
 				// mettre le jeu
+				
 
 			} else if (x==2) {
 				regle();
-				System.out.println("Entrer une touche pour revenir");
-				x = sc.nextInt();
-
+				System.out.println("Entrer 1 pour revenir");
+				
+				while(x!=1) {    
+					x = sc.nextInt();
+				} 
+				
 
 			} else if (x==3){
 
@@ -62,7 +66,6 @@ public class Menu {
 
 	public static void MenuDuDebut() {
 		System.out.println("Bienvenue dans ZombIUT");
-		System.out.println("Choix :");
 		System.out.println("1: Play ");
 		System.out.println("2: Rules");
 		System.out.println("3: Reload");
