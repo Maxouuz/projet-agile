@@ -25,6 +25,7 @@ public class Player {
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
 		sanityLvl = MAXSANITYLVL;
+		radioactivityLvl = MAXRADIOACTIVITYLVL;
 		radioactivityLvl = 0;
 		inventory = new Inventory();
 		position = new Coordonates(0, 0);
