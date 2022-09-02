@@ -26,4 +26,12 @@ public class Inventory {
 		});
 	}
 	
+	public void clearAll() {
+		inventory.clear();
+	}
+
+	public HashMap<Ressources, Integer> getInventory() {
+		return inventory;
+	}
+	
 }
