@@ -75,11 +75,31 @@ public class Player {
 		return isThirsty;
 	}
 
-	public void dayPast() {
-		waterLvl -= 1;
-		hungerLvl -= 1;
-		sanityLvl -= 1;
-		daysSurvived += 1;
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void dayPass() {
+		if (waterLvl > 0) {
+			waterLvl -= 1;
+		}
+
+		if (hungerLvl > 0) {
+			hungerLvl -= 1;
+		}
+
+		if (hungerLvl > 0) {
+			sanityLvl -= 1;
+		}
+
 		if (waterLvl < 3)
 			isThirsty = true;
 		if (hungerLvl < 3)
@@ -108,7 +128,6 @@ public class Player {
 		position = other;
 	}
 
-	// TODO
 	public void dispInventory() {
 		inventory.affichage();
 	}
@@ -144,8 +163,8 @@ public class Player {
 	}
 
 	public void isEating() {
-		if (hungerLvl != MAXHUNGERLVL) {
-			hungerLvl = hungerLvl + 2;
+		if (hungerLvl <= MAXHUNGERLVL) {
+			hungerLvl = hungerLvl + 1;
 		}
 	}
 
