@@ -13,19 +13,20 @@ public class Lane {
         while(i < SIZE) {
             Random randPres = new Random();
             //Random randObject = new Random();
-            randPres.doubles(0,1);
-            if(randPres.equals(0)){
-                stuff.add("    ");
+            
+            if(randPres.nextInt(3) == 0){
+            	stuff.add("***");
+                
             }else {
                 //randObject.doubles
-                stuff.add("/");
+                stuff.add(" 0 ");
             }
             
             i++;
         }
     }
     
-    protected boolean allowDisplacement(int playerPosition, int displacement) {
+    protected boolean allowDisplacement(Coordonates playerPosition, int displacement) {
         boolean bool = false;
         if((displacement==1 && inBoard(playerPosition, displacement)) || (displacement ==-1 && inBoard(playerPosition, displacement))) {
             bool = true;
@@ -33,30 +34,32 @@ public class Lane {
         return bool;
     }
     
-    protected boolean inBoard(int playerPosition, int displacement) {
+    protected boolean inBoard(Coordonates playerPosition, int displacement) {
         boolean in = true;
-        if(playerPosition+displacement<0  || playerPosition+displacement>SIZE) {
+        if(playerPosition.getX()+displacement<0  || playerPosition.getX()+displacement>=SIZE) {
             in = false;
         }
         return in;
     }
     
-    protected void move (int playerPosition, int displacement) {
+    protected void move (Coordonates playerPosition, int displacement) {
         if(allowDisplacement(playerPosition, displacement)) {
-            playerPosition+=displacement;
+            playerPosition.setX(playerPosition.getX()+displacement);
             
         }
     }
     
-    protected void print(int playerPosition) {
+    protected void print(Coordonates playerPosition) {
+    	System.out.print("|");
         for (int i =0; i<SIZE; i++) {
-            if(i==playerPosition) {
-                System.out.println("|X|");
+            if(i==playerPosition.getX()) {
+                System.out.print("X|");
             }else {
-                System.out.println("|"+ stuff.get(i)+"|");
+                System.out.print(""+ stuff.get(i)+"|");
             }
             
         }
+        System.out.println();
         
     }
    
