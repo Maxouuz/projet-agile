@@ -36,11 +36,9 @@ public class Lane {
     
     protected boolean inBoard(Coordonates playerPosition, int displacement) {
         boolean in = true;
-<<<<<<< HEAD
+
         if(playerPosition.getX()+displacement<0  || playerPosition.getX()+displacement>=SIZE) {
-=======
-        if(playerPosition.getX()+displacement<0  || playerPosition.getX()+displacement>SIZE) {
->>>>>>> 534e066492bd4083ce8a594721def3f38ffdced1
+        
             in = false;
         }
         return in;
