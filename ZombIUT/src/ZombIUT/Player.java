@@ -43,7 +43,6 @@ public class Player {
 		position = other;
 	}
 	
-	//TODO
 	public void dispInventory() {
 		inventory.affichage();
 	}
@@ -59,6 +58,7 @@ public class Player {
 		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", isThirsty=" + isThirsty + ", inventory="
 				+ inventory + ", position=" + position + "]";
 	}
+	
 	
 	
 }
