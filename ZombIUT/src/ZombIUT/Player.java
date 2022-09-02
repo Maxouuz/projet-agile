@@ -43,11 +43,15 @@ public class Player {
 		position = other;
 	}
 	
-	//TODO
 	public void dispInventory() {
 		inventory.affichage();
 	}
 	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+
 	public void dispWaterLvl() {
 		for(int i = 0 ; i < waterLvl ; i++)
 			System.out.print("💧");
@@ -59,6 +63,7 @@ public class Player {
 		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", isThirsty=" + isThirsty + ", inventory="
 				+ inventory + ", position=" + position + "]";
 	}
+	
 	
 	
 }

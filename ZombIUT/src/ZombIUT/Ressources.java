@@ -2,7 +2,7 @@ package ZombIUT;
 
 public enum Ressources {
 
-    EAU("Eau : Bouteille d'eau",0), PAIN("Pain : Morceau de Pain",1), MASQUE("Masque : Masque à Gaz",2), CARTE("Carte : Carte des alentours",3), KIT("Kit : Kit de premier secours",4), SAC("Sac : Un sac à dos basique",5), HACHE("Hache : Outils simple pour se défendre",6), FUSIL("Fusil : Arme à feu",7);
+    EAU("EAU",0), PAIN("PAIN",1), MASQUE("MASQUE",2), CARTE("CARTE",3), KIT("KIT",4), SAC("SAC",5), HACHE("HACHE",6), FUSIL("FUSIL",7);
     
     private String nom;
     private int place;

@@ -30,6 +30,10 @@ public class Inventory {
 		inventory.clear();
 	}
 	
+	public boolean sameObject(Ressources r) {
+		return inventory.containsKey(r);
+	}
+	
 	public void remplacer(Ressources r1, int quantity, Ressources r2, int quantity2) {
 		inventory.forEach((key, value) -> {
 			if (key == r1) {
