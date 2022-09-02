@@ -48,6 +48,11 @@ public class Player {
 		inventory.affichage();
 	}
 	
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+
 	public void dispWaterLvl() {
 		for(int i = 0 ; i < waterLvl ; i++)
 			System.out.print("💧");

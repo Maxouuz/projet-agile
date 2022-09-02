@@ -26,11 +26,14 @@ public class lineDisplacement {
             		if(choix.equals("q")) {
             			l.move(p.getPosition(), -1);
             			l.print(p.getPosition());
-            			        		
+            			l.pick(p.getPosition(), p.getInventory());
+            			p.dispInventory();
             			
             		}else if(choix.equals("d")) {
             			l.move(p.getPosition(), 1);
             			l.print(p.getPosition());
+            			l.pick(p.getPosition(), p.getInventory()); 
+            			p.dispInventory();
             			
             		}else if(choix.equals("exit")){
             			isTrue = true;
