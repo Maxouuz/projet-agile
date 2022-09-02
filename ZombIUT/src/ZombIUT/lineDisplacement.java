@@ -17,31 +17,17 @@ public class lineDisplacement {
             Lane l = new Lane();
             l.print(p.getPosition());
             
-
-            Scanner sc = new Scanner(System.in);
-            String choix;
             boolean isTrue = false;
-            while(!isTrue) {
-            	choix = sc.nextLine();
-            		if(choix.equals("q")) {
-            			l.move(p.getPosition(), -1);
-            			l.print(p.getPosition());
-            			l.pick(p.getPosition(), p.getInventory());
-            			p.dispInventory();
+            do {
+            	l.pick(p.getPosition(), p.getInventory()); 
+    			p.dispInventory();
+            	l.move(p.getPosition());
+            		
             			
-            		}else if(choix.equals("d")) {
-            			l.move(p.getPosition(), 1);
-            			l.print(p.getPosition());
-            			l.pick(p.getPosition(), p.getInventory()); 
-            			p.dispInventory();
-            			
-            		}else if(choix.equals("exit")){
-            			isTrue = true;
-            			
-            		}else {
-            			System.out.println("veuillez choisir la gauche ou la droite");
-            		}
-        }
+        
+            		
+            }while( p.getInventory().compteObjets()<5);
+            System.out.println("Vous avez récupéré 5 objets ! Vous n'avez plus de place et vous devez maintenant survivre.");
     }
 }
 

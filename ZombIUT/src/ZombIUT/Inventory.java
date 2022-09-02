@@ -1,6 +1,7 @@
 package ZombIUT;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Inventory {
 
@@ -22,9 +23,20 @@ public class Inventory {
 	
 	public void affichage () {
 		inventory.forEach((key, value) -> {
-			System.out.print("Vous avez: " + value + " de " + key);
+			System.out.print("Vous avez: " + value + " de " + key+"\n");
+			
 		});
+		System.out.println("Vous disposez de "+compteObjets()+" objets");
 	}
+	
+	public int compteObjets() {
+		int total = 0;
+		for (Integer x : inventory.values()) {
+			total += x;
+		}
+		return total;
+	}
+	
 	
 	public void clearAll() {
 		inventory.clear();
