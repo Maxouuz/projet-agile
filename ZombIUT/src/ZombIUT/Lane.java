@@ -15,7 +15,7 @@ public class Lane {
             Random randPres = new Random();
             //Random randObject = new Random();
             
-            if(randPres.nextInt(3) == 0){
+            if(randPres.nextInt(2) == 0){
             	int rand=randPres.nextInt(8);
             	for(Ressources r : Ressources.values()) {
             		if(rand==r.getPlace()) {

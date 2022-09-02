@@ -52,6 +52,14 @@ public class Player {
 		return isThirsty;
 	}
 
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+	}
+
 	public void dayPast() {
 		waterLvl -= 1;
 		hungerLvl -= 1;
