@@ -15,6 +15,7 @@ public class Player {
 	private Inventory inventory;
 	private Coordonates position;
 
+	
 	public Player(String name) {
 		NAME = name;
 		isThirsty = false;
