@@ -45,12 +45,13 @@ public class Player {
 	
 	//TODO
 	public void dispInventory() {
-	
+		inventory.affichage();
 	}
 	
 	public void dispWaterLvl() {
 		for(int i = 0 ; i < waterLvl ; i++)
-			System.out.println("💧");
+			System.out.print("💧");
+		System.out.println();
 	}
 
 	@Override
