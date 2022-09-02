@@ -1,0 +1,3 @@
+NOM de l'event , reponse si oui , reponse si non, object retirer si oui, quantité
+"Un inconnu viens taper à la porte du bunker, dois-je lui ouvrir ? ",Merci de m'avoir donner a boire ! ,l'inconnu arrète de frapper à la porte... il a du repartir, EAU,-1
+"Un autre survivant ! il veux ce battre contre moi pour gagner à manger, que dois-je faire ?",une ration en plus ça fera du bien !,"je ne veux pas me battre, adieux !", PAIN,1
