@@ -15,11 +15,16 @@ public class Lane {
             //Random randObject = new Random();
             
             if(randPres.nextInt(3) == 0){
-            	stuff.add("***");
+            	int rand=randPres.nextInt(8);
+            	for(Ressources r : Ressources.values()) {
+            		if(rand==r.getPlace()) {
+            			stuff.add(r.getNom());
+            		}
+            	}
                 
             }else {
                 //randObject.doubles
-                stuff.add(" 0 ");
+                stuff.add("   ");
             }
             
             i++;
@@ -36,9 +41,7 @@ public class Lane {
     
     protected boolean inBoard(Coordonates playerPosition, int displacement) {
         boolean in = true;
-
         if(playerPosition.getX()+displacement<0  || playerPosition.getX()+displacement>=SIZE) {
-        
             in = false;
         }
         return in;
@@ -56,12 +59,16 @@ public class Lane {
         for (int i =0; i<SIZE; i++) {
             if(i==playerPosition.getX()) {
                 System.out.print("X|");
-            }else {
+            }else if(stuff.get(i).equals("   ")) {
                 System.out.print(""+ stuff.get(i)+"|");
+            }else {
+            	System.out.print(" *** |");
             }
             
         }
-        System.out.println();
+        
+        
+        System.out.println("		"+stuff.get(playerPosition.getX()));
         
     }
    

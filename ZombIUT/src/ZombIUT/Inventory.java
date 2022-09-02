@@ -36,7 +36,7 @@ public class Inventory {
 				remove(r1, quantity);
 				add(r2, quantity2);
 			} else {
-				System.out.println("Cet object ne ce trouve pas dans votre inventaire");
+				System.out.println("Cet objet ne se trouve pas dans votre inventaire");
 			}
 		});
 	}
