@@ -14,7 +14,6 @@ public class Lane {
         while(i < SIZE) {
             Random randPres = new Random();
             //Random randObject = new Random();
-            
             if(randPres.nextInt(4) == 0){
             	int rand=randPres.nextInt(8);
             	for(Ressources r : Ressources.values()) {
@@ -92,6 +91,8 @@ public class Lane {
         }
         
      
+    
+    
     
     
     protected void pick (Coordonates playerPosition, Inventory inventaire) {

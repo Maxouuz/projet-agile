@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Inventory {
 
+
 	HashMap<Ressources, Integer> inventory;
 	
 	public Inventory() {

@@ -8,15 +8,14 @@ public class lineDisplacement {
 
     public static void main(String[] args) {
 
-    	play();
+        play();
     }
-    
+
         public static void play() {
-        	Player p  = new Player ("jfj");
-        	
+            Player p  = new Player ("jfj");
+
             Lane l = new Lane();
             l.print(p.getPosition());
-            
             boolean isTrue = false;
             do {
             	l.pick(p.getPosition(), p.getInventory()); 
@@ -31,3 +30,4 @@ public class lineDisplacement {
     }
 }
 
+                
