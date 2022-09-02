@@ -45,7 +45,7 @@ public class Menu {
 
 			} else if (x=='2') {
 				regle();
-				System.out.println("Entrer 1 pour revenir");	
+				System.out.println("Entrer une touche pour sortir");	
 				x = saisieRetourMenu();
 
 			} else if (x=='3'){
@@ -87,7 +87,7 @@ public class Menu {
 	
 	public static char saisieRetourMenu() {
 		String chaine = sc.nextLine();
-		while (chaine.equals("") || chaine.charAt(0) - '0' < 1 || chaine.charAt(0) - '0' > 1 || chaine.length() != 1) {
+		while (chaine.equals("")) {
 				System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
 
 			chaine = sc.nextLine();
