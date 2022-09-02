@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class Survie {
 	private static int jour = 1;
 	static Scanner sc = new Scanner(System.in);
-	public Survie() {
-		sc = new Scanner(System.in);
-	}
 
 
 	public static void play(Player p){
@@ -15,12 +12,17 @@ public class Survie {
         int choix = 0;
 		while(!dead) {
 			// Choix d'action
-			
+			System.out.println("Jour :"+jour);
+			System.out.println("Votre Status :");
+			System.out.println("A soif :"+p.isThirsty());
+			System.out.println("A Faim :"+p.isThirsty());
+		//	System.out.println("Inventaire :"+p.dispInventory());
+			System.out.println();
 			System.out.println("Voulez-vous manger ? 1: Oui 2: Non");
 			choix = Survie.saisie1ou2();
 			
 			if(choix=='1') {
-				System.out.println("m");
+			
 			} 
 			
 			// Choix de sorti
@@ -28,14 +30,14 @@ public class Survie {
 			
 			choix = Survie.saisie1ou2();
 			if(choix=='1') {
-				System.out.println("b");
+			
 			} 
 			System.out.println("Voulez-vous sortir ? 1: Oui 2: Non");
 			// si oui : evenement aleatoire 
 			// si non : day++s
 			choix = Survie.saisie1ou2();
 			if(choix=='1') {
-				System.out.println("s");
+				
 			} 
 			
 			jour++;
@@ -59,8 +61,7 @@ public class Survie {
 	}
 	
     public static void main(String[] args) {
-    	Player ouis = new Player("ouisiti");
-    	Survie.play(ouis);
+    	Survie.play(new Player("ouisiti"));
     }
 	
 }
