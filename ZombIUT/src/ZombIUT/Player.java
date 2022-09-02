@@ -67,9 +67,19 @@ public class Player {
 	}
 
 	public void dayPast() {
-		waterLvl -= 1;
-		hungerLvl -= 1;
-		sanityLvl -= 1;
+		if(waterLvl>0) {
+			waterLvl -= 1;
+		}
+
+		if(hungerLvl>0) {
+			hungerLvl -= 1;
+		}
+
+		if(hungerLvl>0) {
+			sanityLvl -= 1;
+		}
+
+
 		if (waterLvl < 3)
 			isThirsty = true;
 		if (hungerLvl < 3)
@@ -117,13 +127,13 @@ public class Player {
 
 	public void dispWaterLvl() {
 		for (int i = 0; i < waterLvl; i++)
-			System.out.print("💧");
+			System.out.print("💧   ");
 		System.out.println();
 	}
 
 	public void dispHungerLvl() {
 		for (int i = 0; i < hungerLvl; i++)
-			System.out.print("🍗");
+			System.out.print("🍗  ");
 		System.out.println();
 	}
 
@@ -131,6 +141,18 @@ public class Player {
 		for (int i = 0; i < sanityLvl; i++)
 			System.out.print("🧼");
 		System.out.println();
+	}
+	
+	public void isEating() {
+		//if(hungerLvl!=MAXHUNGERLVL) {
+			hungerLvl=hungerLvl+2;
+		//} 
+	}
+	
+	public void isDrinking() {
+		//if(waterLvl!=MAXWATERLVL) {
+			waterLvl=waterLvl+2;
+		//} 
 	}
 
 	@Override
