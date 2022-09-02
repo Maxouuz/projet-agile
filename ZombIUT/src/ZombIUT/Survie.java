@@ -1,5 +1,7 @@
 package ZombIUT;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -86,7 +88,7 @@ public class Survie {
 				System.out.println("Vous êtes mort le jour :"+jour);
 			}
 		}
-
+		writeScore(p, jour);
 
 	}
 
@@ -105,5 +107,18 @@ public class Survie {
 	public static void main(String[] args) {
 		Survie.play(new Player("ouisiti"));
 	}
+	
+	public static void writeScore(Player p,int j) {
+	    try {
+	        FileWriter myWriter = new FileWriter("ressources/score.txt");
+	        myWriter.write(""+p.getName()+" :"+j);
+	        myWriter.close();
+	        System.out.println("Sucess");
+
+	      } catch (IOException e) {
+	        System.out.println("An error occurred.");
+	        e.printStackTrace();
+	      }
+	}	
 
 }

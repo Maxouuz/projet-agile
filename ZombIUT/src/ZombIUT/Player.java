@@ -149,13 +149,13 @@ public class Player {
 	
 	public void isEating() {
 		if(hungerLvl<=MAXHUNGERLVL) {
-			hungerLvl=hungerLvl+1;
+			hungerLvl=hungerLvl+2;
 		} 
 	}
 	
 	public void isDrinking() {
 		if(waterLvl<=MAXWATERLVL) {
-			waterLvl=waterLvl+1;
+			waterLvl=waterLvl+2;
 		} 
 	}
 
