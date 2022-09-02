@@ -13,12 +13,13 @@ public class Lane {
         while(i < SIZE) {
             Random randPres = new Random();
             //Random randObject = new Random();
-            randPres.doubles(0,1);
-            if(randPres.equals(0)){
-                stuff.add("    ");
+            
+            if(randPres.nextInt(3) == 0){
+            	stuff.add("***");
+                
             }else {
                 //randObject.doubles
-                stuff.add("/");
+                stuff.add(" 0 ");
             }
             
             i++;
@@ -49,14 +50,16 @@ public class Lane {
     }
     
     protected void print(int playerPosition) {
+    	System.out.print("|");
         for (int i =0; i<SIZE; i++) {
             if(i==playerPosition) {
-                System.out.println("|X|");
+                System.out.print("X|");
             }else {
-                System.out.println("|"+ stuff.get(i)+"|");
+                System.out.print(""+ stuff.get(i)+"|");
             }
             
         }
+        System.out.println();
         
     }
    
