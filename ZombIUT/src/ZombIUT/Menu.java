@@ -26,15 +26,12 @@ public class Menu {
 			x=0;
 			clearScreen();
 			MenuDuDebut();
-			
-			System.out.println("Choix:");
-			
 
-			while(x!=1 && x!=2 && x!=3 && x!=4 && x!=5) {    
-				x = sc.nextInt();
-			} 
+			System.out.println("Choix:");
+			x= saisieValideMenu();
+
 			clearScreen();
-			if(x==1) {
+			if(x=='1') {
 
 
 				System.out.println();
@@ -45,22 +42,18 @@ public class Menu {
 				// mettre le jeu
 				clearScreen();
 				lineDisplacement.play();
-				
 
-			} else if (x==2) {
+			} else if (x=='2') {
 				regle();
-				System.out.println("Entrer 1 pour revenir");
-				
-				while(x!=1) {    
-					x = sc.nextInt();
-				} 
-				
+				System.out.println("Entrer 1 pour revenir");	
+				x = saisieRetourMenu();
 
-			} else if (x==3){
+			} else if (x=='3'){
 
-			} else if (x==4){
+			} else if (x=='4'){
 
-			} else if (x==5){
+			} else if (x=='5'){
+				System.out.println("Merci a bientôt !");
 				ff=false;
 			}		
 		}
@@ -71,20 +64,40 @@ public class Menu {
 		System.out.println("Bienvenue dans ZombIUT");
 		System.out.println("1: Play ");
 		System.out.println("2: Rules");
-		System.out.println("3: Reload");
-		System.out.println("4: Score");
+//		System.out.println("3: Reload");
+//		System.out.println("4: Score");
 		System.out.println("5: Exit");
 	}
 
 
 	public static void regle() {
-		System.out.println("oui");
+		System.out.println("Survie à l'IUT");
 
 	}
+
+	public static char saisieValideMenu() {
+		String chaine = sc.nextLine();
+		while (chaine.equals("") || chaine.charAt(0) - '0' < 1 || chaine.charAt(0) - '0' > 5 || chaine.length() != 1) {
+				System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
+
+			chaine = sc.nextLine();
+		}
+		return chaine.charAt(0);
+	}
 	
-	   public static void clearScreen() {  
-		    System.out.println(System.lineSeparator().repeat(70));
-		   }  
+	public static char saisieRetourMenu() {
+		String chaine = sc.nextLine();
+		while (chaine.equals("") || chaine.charAt(0) - '0' < 1 || chaine.charAt(0) - '0' > 1 || chaine.length() != 1) {
+				System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
+
+			chaine = sc.nextLine();
+		}
+		return chaine.charAt(0);
+	}
+
+	public static void clearScreen() {  
+		System.out.println(System.lineSeparator().repeat(70));
+	}  
 
 
 }
