@@ -31,7 +31,7 @@ public class Player {
 
 	public Player(String name) {
 		this.name = name;
-		daysSurvived = 0;
+		daysSurvived = 1;
 		isThirsty = false;
 		isStarving = false;
 		waterLvl = MAXWATERLVL;
@@ -113,6 +113,8 @@ public class Player {
 		if (radioactivityLvl == 5) {
 			healtLvl -= 1;
 		}
+		
+		daysSurvived++;
 	}
 
 	public void setPosition(int x, int y) {
@@ -171,31 +173,6 @@ public class Player {
 	public void isDrinking() {
 		if (waterLvl <= MAXWATERLVL) {
 			waterLvl = waterLvl + 2;
-		}
-	}
-
-	public void savingScores(String location) {
-		try (BufferedWriter bw = new BufferedWriter(new FileWriter(location))) {
-			bw.write(name + " à survécu : " + getDaysSurvived() + "Jours.");
-			bw.newLine();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void loadingScores(String location) {
-		try (BufferedReader br = new BufferedReader(new FileReader(location))) {
-			String line = br.readLine();
-			while (line != null) {
-				System.out.println(line);
-				line = br.readLine();
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println("File not found: " + e.getMessage());
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Reading error: " + e.getMessage());
-			e.printStackTrace();
 		}
 	}
 

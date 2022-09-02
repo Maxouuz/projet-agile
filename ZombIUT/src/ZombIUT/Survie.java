@@ -6,7 +6,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Survie {
-	private static int jour = 1;
 	static Scanner sc = new Scanner(System.in);
 
 
@@ -18,7 +17,7 @@ public class Survie {
 		while(!dead) {
 			// Choix d'action
 			Menu.clearScreen();
-			System.out.println("Jour :"+jour);
+			System.out.println("Jour :"+p.getDaysSurvived());
 			System.out.println("Votre Status :");
 			// afficher les barres
 			p.dispWaterLvl();
@@ -81,14 +80,14 @@ public class Survie {
 			}
 			
 			p.dayPass();
-			jour++;
+			
 			
 			if(p.getWaterLvl() == 0 && dayWithoutDrink == 3) {
 				dead=true;
-				System.out.println("Vous êtes mort le jour :"+jour);
+				System.out.println("Vous êtes mort le jour :"+p.getDaysSurvived());
 			}
 		}
-		writeScore(p, jour);
+		writeScore(p);
 
 	}
 
@@ -108,17 +107,19 @@ public class Survie {
 		Survie.play(new Player("ouisiti"));
 	}
 	
-	public static void writeScore(Player p,int j) {
-	    try {
-	        FileWriter myWriter = new FileWriter("ressources/score.txt");
-	        myWriter.write(""+p.getName()+" :"+j);
-	        myWriter.close();
-	        System.out.println("Sucess");
-
-	      } catch (IOException e) {
+	public static void writeScore(Player p) {
+		
+		try
+		{
+		 FileWriter fw = new FileWriter("ressources/score.txt",true);
+		 fw.write(""+p.getName()+" :"+p.getDaysSurvived()+"\n");
+		 fw.close();
+		}
+		catch(IOException ioe)
+		{
 	        System.out.println("An error occurred.");
-	        e.printStackTrace();
-	      }
+	        ioe.printStackTrace();
+		}
 	}	
 
 }
