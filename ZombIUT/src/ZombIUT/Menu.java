@@ -42,6 +42,7 @@ public class Menu {
 				Player p = new Player(name);
 				System.out.println(p);
 				// mettre le jeu
+				lineDisplacement.play();
 				
 
 			} else if (x==2) {
