@@ -6,16 +6,17 @@ public class Player {
 	private final static int MAXHUNGERLVL = 5;
 	private final static int MAXHEALTLVL = 5;
 	private final static int MAXSANITYLVL = 5;
+	private final static int MAXRADIOACTIVITYLVL = 5;
 	private int waterLvl;
 	private int hungerLvl;
 	private int healtLvl;
 	private int sanityLvl;
+	private int radioactivityLvl;
 	private boolean isThirsty;
 	private boolean isStarving;
 	private Inventory inventory;
 	private Coordonates position;
 
-	
 	public Player(String name) {
 		NAME = name;
 		isThirsty = false;
@@ -24,8 +25,13 @@ public class Player {
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
 		sanityLvl = MAXSANITYLVL;
+		radioactivityLvl = 0;
 		inventory = new Inventory();
 		position = new Coordonates(0, 0);
+	}
+
+	public int getRadioactivityLvl() {
+		return radioactivityLvl;
 	}
 
 	public int getSanityLvl() {
@@ -66,6 +72,9 @@ public class Player {
 		if (sanityLvl == 0) {
 			healtLvl -= 1;
 		}
+		if(radioactivityLvl == 5) {
+			healtLvl -= 1;
+		}
 	}
 
 	public void setPosition(int x, int y) {
@@ -92,6 +101,12 @@ public class Player {
 		System.out.println();
 	}
 
+	public void dispRadioactivityLvl() {
+		for (int i = 0; i < radioactivityLvl; i++)
+			System.out.print("❤☢️");
+		System.out.println();
+	}
+
 	public void dispWaterLvl() {
 		for (int i = 0; i < waterLvl; i++)
 			System.out.print("💧");
@@ -103,18 +118,18 @@ public class Player {
 			System.out.print("🍗");
 		System.out.println();
 	}
-	
+
 	public void dispSanityLvl() {
 		for (int i = 0; i < sanityLvl; i++)
 			System.out.print("🧼");
 		System.out.println();
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Player [NAME=" + NAME + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
-				+ ", sanityLvl=" + sanityLvl + ", isThirsty=" + isThirsty + ", isStarving=" + isStarving
-				+ ", inventory=" + inventory + ", position=" + position + "]";
+				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
+				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
 
 }
