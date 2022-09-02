@@ -19,7 +19,7 @@ public class Inventory {
 	public void remove(Ressources c, int quantity) {
 		inventory.remove(c, quantity);
 	}
-    
+	
 	public void affichage () {
 		inventory.forEach((key, value) -> {
 			System.out.print("Vous avez: " + value + " de " + key);
@@ -28,6 +28,17 @@ public class Inventory {
 	
 	public void clearAll() {
 		inventory.clear();
+	}
+	
+	public void remplacer(Ressources r1, int quantity, Ressources r2, int quantity2) {
+		inventory.forEach((key, value) -> {
+			if (key == r1) {
+				remove(r1, quantity);
+				add(r2, quantity2);
+			} else {
+				System.out.println("Cet object ne ce trouve pas dans votre inventaire");
+			}
+		});
 	}
 
 	public HashMap<Ressources, Integer> getInventory() {
