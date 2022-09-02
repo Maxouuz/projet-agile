@@ -24,15 +24,16 @@ public class Menu {
 
 		while(ff) {
 			x=0;
+			clearScreen();
 			MenuDuDebut();
-
+			
 			System.out.println("Choix:");
-
+			
 
 			while(x!=1 && x!=2 && x!=3 && x!=4 && x!=5) {    
 				x = sc.nextInt();
 			} 
-
+			clearScreen();
 			if(x==1) {
 
 
@@ -42,6 +43,7 @@ public class Menu {
 				Player p = new Player(name);
 				System.out.println(p);
 				// mettre le jeu
+				clearScreen();
 				lineDisplacement.play();
 				
 
@@ -79,6 +81,10 @@ public class Menu {
 		System.out.println("oui");
 
 	}
+	
+	   public static void clearScreen() {  
+		    System.out.println(System.lineSeparator().repeat(70));
+		   }  
 
 
 }
