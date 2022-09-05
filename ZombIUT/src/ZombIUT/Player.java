@@ -236,7 +236,7 @@ public class Player {
 
 		try {
 			JSONObject jsonO = new JSONObject(fichier);
-			this.daysSurvived = (int) jsonO.get("daysSurvived");
+			this.daysSurvived = Integer.parseInt(jsonO.get("daysSurvived").toString());
 			this.healtLvl = (int) jsonO.get("healtlvl");
 			this.hungerLvl = (int) jsonO.get("hungerlvl");
 			this.name = fichier.toString();
