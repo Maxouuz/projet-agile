@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -221,14 +223,15 @@ public class Player {
 		json.put("sanitylvl", sanityLvl);
 
 		for (Map.Entry<Ressources, Integer> entry : inventory.getInventory().entrySet()) {
-			inventaire.put(entry.getKey());
-			inventaire.put(entry.getValue());
+			JSONObject obj = new JSONObject();
+			obj.put("nom", entry.getKey());
+			obj.put("quantite", entry.getValue());
+			inventaire.put(obj);
 		}
+		json.put("inventaire", inventaire);
 		// Ecriture du texte dans le fichier:
 		try (Writer fichier = new FileWriter(getName() + ".json")) {
 			json.write(fichier, 4, 0);
-			inventaire.write(fichier);
-			fichier.close();
 		} catch (IOException e) {
 			System.out.println("Impossible de créer le fichier !");
 			e.printStackTrace();
@@ -237,10 +240,9 @@ public class Player {
 	}
 
 	public void jSonToString(String name) {
-
-		File fichier = new File(name + ".json");
-
+		
 		try {
+			String fichier = Files.readString(Paths.get(name + ".json"));
 			JSONObject jsonO = new JSONObject(fichier);
 			this.daysSurvived = Integer.parseInt(jsonO.get("daysSurvived").toString());
 			this.healtLvl = (int) jsonO.get("healtlvl");
