@@ -5,6 +5,22 @@ import java.util.Scanner;
 
 public class Menu {
 	//Main
+	
+	
+	//Color
+	public static final String ANSI_RESET = "\u001B[0m";
+	public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_CYAN= "\u001B[36m";
+    
+    
+    //Background
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_RED_BACKGROUND
+    = "\u001B[41m";
+    public static final String ANSI_BLUE_BACKGROUND
+    = "\u001B[44m";
 	public static Scanner sc;
 
 	public Menu() {
@@ -17,7 +33,7 @@ public class Menu {
 
 	}
 
-
+	
 	public static void menu() {
 		int x;
 		boolean ff = true;
@@ -26,8 +42,7 @@ public class Menu {
 			x=0;
 			clearScreen();
 			MenuDuDebut();
-
-			System.out.println("Choix:");
+			System.out.println("Choix:"+ANSI_RESET);
 			x= saisieValideMenu();
 
 			clearScreen();
@@ -35,7 +50,7 @@ public class Menu {
 
 
 				System.out.println();
-				System.out.println("Pseudo :");
+				System.out.println(ANSI_RED+"Pseudo :"+ANSI_RESET);
 				String name = sc.next();
 				Player p = new Player(name);
 				// mettre le jeu
@@ -44,17 +59,17 @@ public class Menu {
 				Survie.play(p);
 			} else if (x=='2') {
 				regle();
-				System.out.println("Entrer une touche pour sortir");	
+				System.out.println(ANSI_YELLOW+"Entrer une touche pour sortir"+ANSI_RESET);	
 				x = saisieRetourMenu();
 
 			} else if (x=='3'){
 
 			} else if (x=='4'){
 				tabScore.readFile();
-				System.out.println("Entrer une touche pour sortir");	
+				System.out.println(ANSI_YELLOW+"Entrer une touche pour sortir"+ANSI_RESET);	
 				x = saisieRetourMenu();
 			} else if (x=='5'){
-				System.out.println("Merci a bientôt !");
+				System.out.println(ANSI_RED+"Merci a bientôt !"+ANSI_RESET);
 				
 				ff=false;
 			}		
@@ -62,12 +77,12 @@ public class Menu {
 	}
 
 	public static void MenuDuDebut() {
-		System.out.println("Bienvenue dans ZombIUT");
-		System.out.println("1: Play ");
-		System.out.println("2: Rules");
+		System.out.println(ANSI_YELLOW_BACKGROUND +ANSI_RED+"               BIENVENUE DANS ZOMBIUT"+ANSI_RESET);
+		System.out.println(ANSI_YELLOW+"   1: PLAY ");
+		System.out.println("   2: RULES");
 //		System.out.println("3: Reload");
-		System.out.println("4: Score");
-		System.out.println("5: Exit");
+		System.out.println("   4: SCORES");
+		System.out.println("   5: EXIT"+ANSI_RESET );
 	}
 
 
@@ -79,7 +94,7 @@ public class Menu {
 	public static char saisieValideMenu() {
 		String chaine = sc.nextLine();
 		while (chaine.equals("") || chaine.charAt(0) - '0' < 1 || chaine.charAt(0) - '0' > 5 || chaine.length() != 1) {
-				System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
+				System.out.print(ANSI_RED_BACKGROUND+"\t\t Saisie invalide, veuillez entrer un chiffre valide : "+ANSI_RESET);			
 
 			chaine = sc.nextLine();
 		}
@@ -89,7 +104,7 @@ public class Menu {
 	public static char saisieRetourMenu() {
 		String chaine = sc.nextLine();
 		while (chaine.equals("")) {
-				System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
+				System.out.print(ANSI_RED_BACKGROUND+"\t\t Saisie invalide, veuillez entrer un chiffre valide : "+ANSI_RESET);			
 
 			chaine = sc.nextLine();
 		}
