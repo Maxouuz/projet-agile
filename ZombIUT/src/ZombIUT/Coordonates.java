@@ -24,5 +24,5 @@ public class Coordonates {
         this.y = y;
     }
 
-
+//ceci sont les coordonées du joueur.
 }

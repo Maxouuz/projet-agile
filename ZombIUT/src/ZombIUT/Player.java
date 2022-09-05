@@ -2,8 +2,8 @@ package ZombIUT;
 
 public class Player {
 	private String name;
-	private final static int MAXTHIRST = 5;
-	private final static int MAXHUNGERLVL = 5;
+	private final static int MAXTHIRST = 3;
+	private final static int MAXHUNGERLVL = 3;
 	private final static int MAXHEALTLVL = 5;
 	private final static int MAXSANITYLVL = 5;
 	private final static int MAXRADIOACTIVITYLVL = 5;
