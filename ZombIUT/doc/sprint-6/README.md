@@ -2,17 +2,15 @@
 ---
 ## Démo + planification du sprint suivant
 ### Ce que nous avons fait durant ce sprint :
-- Sur ce sprint nous avons **continués la User Storie** non terminée au sprint précédent. Malgrès le temps qu'il a fallu pour la réaliser, **tout s'est passé sans accros** et cela à pu être fonctionnel pour la démo. 
+- Nous avons continués au maximum nos tests unitaires afin d'avoisiner une couverture suffisante pour nos tests. 
+- Dans une seconde partie, nous nous sommes attaqués au reload de la sauvegarde en **JSON** en essayant de permettre au joueur de quitter la partie et de recharger sa sauvegarde.
 
-- Nous nous sommes également investis dans **les tests unitaires de notre jeu**, afin de d'éviter au maximum les bugs non prévu par notre code.
-  
-- Et pour terminer, nous avons également avancé sur **la barre de vie du jeu**, qui serviras à maintenir le joueur en vie.
----
 ## Rétrospective
 ### Sur quoi avons eu des difficultés ?
 
-- Nous avons commencés les **tests unitaires beaucoup trop tardivement**, ce qui nous as value une couverture médicore. Vu la quantité de code déjà écrite, rattrapé tout cela avec les tests unitaires demande beaucoup plus detemps que prévu.
+Sur ce sprint nous avons beaucoup **travaillé sur le back** de notre code, donc sur la partie non visible de celle-ci, ainsi **la démo fût quasiement identique qu'au sprint précédent.**
 
 ### PDCA
 
-- Afin de régler ce problème, à l'avenir, nous **écrirons les tests unitaires en même temps que le code** et celui-ci devraêtre complet à chaque fin de sprint.
+- Nous aurions **dû détacher un groupe pour travailler** sur la partie visible du jeu, et ainsi proposer de nouvelles fonctionnalitées ào l'utilisateur lors de la démo.
+- Pour ce faire, nous mettrons toujours au minimum **un groupe sur la surface visble** du jeu afin de pouvoir en faire profitier nos utilisateurs sur chaque démo.
