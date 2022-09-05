@@ -91,7 +91,14 @@ public class Menu {
 
 
 	public static void regle() {
-		System.out.println("Survie à l'IUT !!!");
+		System.out.println("Bienvenue dans Zomb'IUT. Dans ce jeu vous devrez survivre dans un monde apocalyptique plein de rebondissements !  \n"
+				+ "Votre but ? Faire les bons choix afin de survivre le plus longtemps possible ! \n \n"
+				+ "Liste des touches pour la partie 1 : \n"
+				+ "Z : haut\n"
+				+ "Q : gauche\n"
+				+ "S : bas\n"
+				+ "D : droite\n"
+				+ "ATTENTION : SI VOUS SORTEZ TROP SANS MASQUE VOUS RISQUEZ DE PERDRE LA PARTIE !");
 
 	}
 

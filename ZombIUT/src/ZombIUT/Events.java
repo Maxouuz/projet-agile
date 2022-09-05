@@ -45,7 +45,8 @@ public class Events {
 		int alea=0;
 		while (res.equals("")) {
 			alea = new Random().nextInt(lines.size());
-			if (lines.get(alea).get(5).equals("0")) {
+			System.out.println("alea");
+			if (lines.get(alea).get(5).equals("0") && (p.getInventory().inventory.containsKey(Ressources.valueOf(lines.get(alea).get(3)))|| (Integer.parseInt(lines.get(alea).get(4))>=0))) {
 				res= lines.get(alea).get(0).toString();
 				lines.get(alea).set(5, Integer.parseInt( lines.get(alea).get(5) + 1) + "");
 				
