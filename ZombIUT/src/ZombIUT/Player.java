@@ -18,9 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class Player {
-	
+
 	private String name;
 	private final static int MAXTHIRST = 3;
 	private final static int MAXHUNGERLVL = 3;
@@ -175,7 +174,7 @@ public class Player {
 	}
 
 	public void eat() {
-		if (hungerLvl <= MAXHUNGERLVL) 
+		if (hungerLvl <= MAXHUNGERLVL)
 			hungerLvl = hungerLvl + 2;
 		if (hungerLvl > STARVATIONTRESHOLD)
 			isStarving = false;
@@ -187,9 +186,9 @@ public class Player {
 		if (thirst > THIRSTTRESHOLD)
 			isThirsty = false;
 	}
-	
+
 	public void increaseRadiation() {
-		if(radioactivityLvl < MAXRADIOACTIVITYLVL)
+		if (radioactivityLvl < MAXRADIOACTIVITYLVL)
 			radioactivityLvl++;
 	}
 
@@ -199,35 +198,60 @@ public class Player {
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
-	
-	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
-    public void toJSON(){
-        // Instanciation du créateur de JSON
-    	JSONObject json = new JSONObject();
-    	JSONArray inventaire = new JSONArray();
 
-    	json.put("daysSurvived", daysSurvived);
+	/*
+	 * FORMAT DU FICHIER DE SAUVEGARDE
+	 */
+	public void toJSON() {
+		// Instanciation du créateur de JSON
+		JSONObject json = new JSONObject();
+		JSONArray inventaire = new JSONArray();
+
+		json.put("daysSurvived", daysSurvived);
 		json.put("waterlvl", thirst);
 		json.put("hungerlvl", hungerLvl);
 		json.put("healtlvl", healtLvl);
 		json.put("sanitylvl", sanityLvl);
-		
-		for(Map.Entry<Ressources, Integer> entry: inventory.getInventory().entrySet())
-		{
+
+		for (Map.Entry<Ressources, Integer> entry : inventory.getInventory().entrySet()) {
 			inventaire.put(entry.getKey());
 			inventaire.put(entry.getValue());
 		}
-        // Ecriture du texte dans le fichier:
-        try(Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")){
-    		json.write(fichier, 4, 0);
-    		inventaire.write(fichier);
-            fichier.close();
-        } catch(IOException e){
-            System.out.println("Impossible de créer le fichier !");
-            e.printStackTrace();
-        }
+		// Ecriture du texte dans le fichier:
+		try (Writer fichier = new FileWriter(getName() + ".json")) {
+			json.write(fichier, 4, 0);
+			inventaire.write(fichier);
+			fichier.close();
+		} catch (IOException e) {
+			System.out.println("Impossible de créer le fichier !");
+			e.printStackTrace();
+		}
 
-    }
-	
+	}
+
+	public void jSonToString(String name) {
+
+		File fichier = new File(name + ".json");
+
+		try {
+			JSONObject jsonO = new JSONObject(fichier);
+			this.daysSurvived = (int) jsonO.get("daysSurvived");
+			this.healtLvl = (int) jsonO.get("healtlvl");
+			this.hungerLvl = (int) jsonO.get("hungerlvl");
+			this.name = fichier.toString();
+			this.sanityLvl = (int) jsonO.get("sanitylvl");
+			
+			JSONArray inventaire = new JSONArray();
+			
+			for (Map.Entry<Ressources, Integer> entry : inventory.getInventory().entrySet()) {
+				inventaire.put(entry.getKey());
+				inventaire.put(entry.getValue());
+			}
+			
+			System.out.println(daysSurvived + " test" + healtLvl);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
