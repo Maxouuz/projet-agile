@@ -14,8 +14,6 @@ public class Survie {
 		boolean dead=false;
 		int choix = 0;
 		int dayWithoutDrink = 0;
-		p.getInventory().add(Ressources.EAU, 2);
-		p.getInventory().add(Ressources.PAIN, 2);
 		while(!dead) {
 			// Choix d'action
 			Menu.clearScreen();
@@ -36,9 +34,9 @@ public class Survie {
 			System.out.println("Inventaire :");
 			p.dispInventory();
 			System.out.println();
-			System.out.println("Voulez-vous manger ? 1: Oui 2: Non");
-			
 
+			
+			System.out.println("Voulez-vous manger ? 1: Oui 2: Non");
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
