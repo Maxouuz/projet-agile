@@ -12,11 +12,10 @@ public class Inventory {
 	}
 
 	public boolean add(Ressources c, int quantity) {
-		if (inventory.size() < 5) {
+		
 			inventory.put(c, quantity);
 			return true;
-		} else
-			return false;
+		
 	}
 
 	public void remove(Ressources c, int quantity) {
@@ -56,6 +55,15 @@ public class Inventory {
 				System.out.println("Cet objet ne se trouve pas dans votre inventaire");
 			}
 		});
+	}
+	public void addRemove (Ressources r1, String string) {
+		int i = Integer.parseInt(string);
+		if(inventory.containsKey(r1)) {
+			inventory.put(r1, i+ inventory.get(r1));
+		}else {
+			inventory.put(r1,1);
+		}
+		
 	}
 
 	public HashMap<Ressources, Integer> getInventory() {
