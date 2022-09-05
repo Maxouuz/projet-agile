@@ -22,11 +22,7 @@ public class Survie {
 			// afficher les barres
 			p.dispWaterLvl();
 			p.dispHungerLvl();
-//			p.dispRadioactivityLvl();
-//			p.dispSanityLvl();
-			
-//			System.out.println("A soif :"+p.isThirsty());
-//			System.out.println("A Faim :"+p.isStarving());
+
 			
 			if(p.isStarving()) {
 				System.out.println("Il a faim");
@@ -43,19 +39,22 @@ public class Survie {
 
 			choix = Survie.saisie1ou2();
 
-			if(choix=='1') {
+			if(choix=='1' && p.getInventory().sameObject(Ressources.valueOf("PAIN"))) {
 				p.eat();
+				// retirer l'objet use
 			} else {
-
+				System.out.println("Vous n'avez pas de quoi manger");
 			}
 
 			// Choix de sortie
 			System.out.println("Voulez-vous boire ? 1: Oui 2: Non");
 
 			choix = Survie.saisie1ou2();
-			if(choix=='1') {
+			if(choix=='1' && p.getInventory().sameObject(Ressources.valueOf("EAU"))) {
 				p.drink();
+				// retirer l'objet use
 			} else {
+				System.out.println("Vous n'avez pas de quoi boire");
 				if(p.getThirst() == 0) {
 					dayWithoutDrink++;
 				}

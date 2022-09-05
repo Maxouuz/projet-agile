@@ -38,7 +38,6 @@ public class Menu {
 				System.out.println("Pseudo :");
 				String name = sc.next();
 				Player p = new Player(name);
-				System.out.println(p);
 				// mettre le jeu
 				clearScreen();
 				lineDisplacement.play(p);
