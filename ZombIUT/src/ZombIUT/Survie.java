@@ -39,26 +39,41 @@ public class Survie {
 
 			choix = Survie.saisie1ou2();
 
-			if(choix=='1' && p.getInventory().sameObject(Ressources.valueOf("PAIN"))) {
-				p.eat();
-				// retirer l'objet use
-			} else {
-				System.out.println("Vous n'avez pas de quoi manger");
-			}
-
-			// Choix de sortie
-			System.out.println("Voulez-vous boire ? 1: Oui 2: Non");
-
-			choix = Survie.saisie1ou2();
-			if(choix=='1' && p.getInventory().sameObject(Ressources.valueOf("EAU"))) {
-				p.drink();
-				// retirer l'objet use
-			} else {
-				System.out.println("Vous n'avez pas de quoi boire");
-				if(p.getThirst() == 0) {
-					dayWithoutDrink++;
+			if(choix=='1') {
+				if(p.getInventory().sameObject(Ressources.valueOf("PAIN"))){
+					p.eat();
+					p.getInventory().remove(Ressources.valueOf("PAIN"), 1);
+				} else {
+					System.out.println("Vous n'avez pas de quoi manger");
 				}
+
+			} 
+
+			
+			System.out.println("Voulez-vous boire ? 1: Oui 2: Non");
+			
+			choix = Survie.saisie1ou2();
+			
+			if(choix=='1') {
+				if(p.getInventory().sameObject(Ressources.valueOf("EAU"))) {
+					p.drink();
+					p.getInventory().remove(Ressources.valueOf("EAU"), 1);	
+				}else {
+					System.out.println("Vous n'avez pas de quoi boire");
+					if(p.getThirst() == 0) {
+						dayWithoutDrink++;
+					}
+				}
+			} 
+			
+			if(choix=='2') {
+					if(p.getThirst() == 0) {
+						dayWithoutDrink++;
+					}
+				
 			}
+			
+			
 			
 			System.out.println("Voulez-vous sortir ? 1: Oui 2: Non");
 			// si oui : evenement aleatoire 
