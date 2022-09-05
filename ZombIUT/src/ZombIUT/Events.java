@@ -66,9 +66,10 @@ public class Events {
 	public void choice(int alea,Player p) {
 		
 		Scanner sc = new Scanner(System.in);
-		String res = sc.nextLine();
+		String res;
 		boolean isTrue=true;
 		while(isTrue) {
+			res = sc.nextLine();
 			if(res.equals("o")){
 				Ressources r = Ressources.valueOf(lines.get(alea).get(3).toString());
 				if(p.getInventory().inventory.containsKey(r)) {
