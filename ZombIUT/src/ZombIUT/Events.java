@@ -14,7 +14,7 @@ import java.util.Random;
 public class Events {
 
 	private String separator = File.separator;
-	private String path = Paths.get(".").normalize().toAbsolutePath() + separator + "ressources" + separator + "Events.csv";
+	private String path = Paths.get(".").normalize().toAbsolutePath() + separator + "src/tmp/Events.csv";
 	private List<List<String>> lines = new ArrayList();
 
 
@@ -24,7 +24,7 @@ public class Events {
 	 * col3: reponse "non"
 	 * col4: object affecté
 	 * col5: quantité modifier
-	 * col6: delai avant nouvel usage*/
+	 * col6: delai avant nouvel usage || si 10 alors peux sortir*/
 	public void collecteDonner () {
 		String delimiter = ";";
 		String line;
@@ -38,17 +38,25 @@ public class Events {
 		}
 	}
 
+	
 	public String dropEvent() {
 		String res = "";
-		int alea = new Random().nextInt(lines.size());
 
-		if (lines.get(alea).get(5).equals("0")) {
-			res = lines.get(alea).get(0).toString();
-		} else {
-			res = dropEvent();
+		while (res.equals("")) {
+			int alea = new Random().nextInt(lines.size());
+			System.out.println("valeur aleatoire tire: " + alea);
+			if (lines.get(alea).get(5).equals("0")) {
+				res = lines.get(alea).get(0).toString();
+				lines.get(alea).set(5, Integer.parseInt( lines.get(alea).get(5) + 1) + "");
+			}
+		}
+		
+		for (int i = 0; i < lines.size(); i++) {
+			if (lines.get(i).get(5).equals(lines.size())) {
+				lines.get(i).set(5, "0");
+			}
 		}
 		
 		return res;
 	}
-
 }
