@@ -88,6 +88,7 @@ public class Survie {
 			}
 		}
 		writeScore(p);
+		p.toJSON();
 
 	}
 

@@ -43,7 +43,6 @@ public class Menu {
 				clearScreen();
 				lineDisplacement.play();
 				Survie.play(p);
-
 			} else if (x=='2') {
 				regle();
 				System.out.println("Entrer une touche pour sortir");	
@@ -55,6 +54,7 @@ public class Menu {
 
 			} else if (x=='5'){
 				System.out.println("Merci a bientôt !");
+				
 				ff=false;
 			}		
 		}
@@ -72,7 +72,7 @@ public class Menu {
 
 
 	public static void regle() {
-		System.out.println("Survie à l'IUT");
+		System.out.println("Survie à l'IUT !!!");
 
 	}
 

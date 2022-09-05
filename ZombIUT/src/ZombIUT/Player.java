@@ -10,13 +10,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+
 
 public class Player {
 	private String name;
-	private final static int MAXWATERLVL = 5;
-	private final static int MAXHUNGERLVL = 5;
-	private final static int MAXHEALTLVL = 5;
-	private final static int MAXSANITYLVL = 5;
+	private final static int MAXWATERLVL = 3;
+	private final static int MAXHUNGERLVL = 3;
+	private final static int MAXHEALTLVL = 3;
+	private final static int MAXSANITYLVL = 3;
 	private final static int MAXRADIOACTIVITYLVL = 5;
 	private int daysSurvived;
 	private int waterLvl;
@@ -182,5 +186,34 @@ public class Player {
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
+	
+	/*FORMAT DU FICHIER DE SAUVEGARDE
+	 * */
+    public void toJSON(){
+        // Instanciation du créateur de JSON
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        // Convertion de la HashMap en texte
+        String nom = gson.toJson(name);
+        String daysurvived = gson.toJson(daysSurvived);
+        String waterlvl = gson.toJson(waterLvl);
+        String hungerlvl = gson.toJson(hungerLvl);
+        String sanitylvl = gson.toJson(sanityLvl);
+        String healtlvl = gson.toJson(healtLvl);
+        String inventaire =  gson.toJson(inventory);
+        // Ecriture du texte dans le fichier: Sauvegarde.json
+        try(FileWriter fichier = new FileWriter("Sauvegarde.json")){
+            fichier.write(nom);
+            fichier.write(healtlvl);
+            fichier.write(hungerlvl);
+            fichier.write(waterlvl);
+            fichier.write(sanitylvl);
+        	fichier.write(inventaire);
+            fichier.close();
+        } catch(IOException e){
+            System.out.println("Impossible de créer le fichier !");
+            e.printStackTrace();
+        }
+
+    }
 
 }
