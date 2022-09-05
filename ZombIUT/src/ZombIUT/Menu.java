@@ -18,7 +18,7 @@ public class Menu {
 	}
 
 
-	public static int menu() {
+	public static void menu() {
 		int x;
 		boolean ff = true;
 
@@ -59,7 +59,6 @@ public class Menu {
 				ff=false;
 			}		
 		}
-		return 42;
 	}
 
 	public static void MenuDuDebut() {
