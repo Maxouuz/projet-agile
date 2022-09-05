@@ -17,6 +17,16 @@ public class Survie {
 		Events events = new Events();
 		while(!dead) {
 			// Choix d'action
+			if(p.getDaysSurvived()%5==0) {
+				System.out.println(Menu.ANSI_RED_BACKGROUND+"Voulez vous sauvegader le jeu et quitter ? 1: Oui 2: Non"+Menu.ANSI_RESET);
+				choix = Survie.saisie1ou2();
+				
+				if(choix=='1') {
+					p.toJSON();
+					System.exit(0);
+				
+			}
+			}
 			Menu.clearScreen();
 			System.out.println(Menu.ANSI_RED_BACKGROUND+"Jour :"+p.getDaysSurvived()+Menu.ANSI_RESET);
 			System.out.println("Votre Status :"+Menu.ANSI_RESET);

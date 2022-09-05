@@ -84,7 +84,7 @@ public class Menu {
 		System.out.println(ANSI_YELLOW_BACKGROUND +ANSI_RED+"               BIENVENUE DANS ZOMBIUT"+ANSI_RESET);
 		System.out.println(ANSI_YELLOW+"   1: PLAY ");
 		System.out.println("   2: RULES");
-//		System.out.println("3: Reload");
+		System.out.println("   3: Reload");
 		System.out.println("   4: SCORES");
 		System.out.println("   5: EXIT"+ANSI_RESET );
 	}
