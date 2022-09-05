@@ -52,7 +52,9 @@ public class Menu {
 			} else if (x=='3'){
 
 			} else if (x=='4'){
-
+				tabScore.readFile();
+				System.out.println("Entrer une touche pour sortir");	
+				x = saisieRetourMenu();
 			} else if (x=='5'){
 				System.out.println("Merci a bientôt !");
 				ff=false;
@@ -66,7 +68,7 @@ public class Menu {
 		System.out.println("1: Play ");
 		System.out.println("2: Rules");
 //		System.out.println("3: Reload");
-//		System.out.println("4: Score");
+		System.out.println("4: Score");
 		System.out.println("5: Exit");
 	}
 
