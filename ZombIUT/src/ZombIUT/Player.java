@@ -249,8 +249,7 @@ public class Player {
 				Ressources r = Ressources.valueOf(key);
 				inventory.add(r, Integer.parseInt(value));
 			}
-			
-			System.out.println(daysSurvived + " test" + healtLvl);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

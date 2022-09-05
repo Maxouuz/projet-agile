@@ -63,7 +63,11 @@ public class Menu {
 				x = saisieRetourMenu();
 
 			} else if (x=='3'){
-
+				System.out.println();
+				System.out.println(ANSI_RED+"Pseudo :"+ANSI_RESET);
+				Player p = new Player(sc.next());
+				p.jSonToString(p.getName());
+				System.out.println("Nombre de jours survecu" + p.getDaysSurvived());
 			} else if (x=='4'){
 				tabScore.readFile();
 				System.out.println(ANSI_YELLOW+"Entrer une touche pour sortir"+ANSI_RESET);	
