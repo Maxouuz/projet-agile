@@ -171,10 +171,9 @@ public class Player {
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
 	
-	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
+	
     public void toJSON(){
-        // Instanciation du créateur de JSON
+        // Instanciation des objects Json
     	JSONObject json = new JSONObject();
     	JSONArray inventaire = new JSONArray();
 
@@ -188,6 +187,8 @@ public class Player {
 			inventaire.put(entry.getKey());
 			inventaire.put(entry.getValue());
 		}
+		json.put("inventory",inventaire);
+		
         // Ecriture du texte dans le fichier:
         try(Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")){
     		json.write(fichier, 4, 0);
