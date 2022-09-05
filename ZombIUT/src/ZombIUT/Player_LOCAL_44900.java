@@ -19,18 +19,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
 public class Player {
-	
 	private String name;
-	private final static int MAXTHIRST = 3;
+	private final static int MAXWATERLVL = 3;
 	private final static int MAXHUNGERLVL = 3;
-	private final static int MAXHEALTLVL = 5;
-	private final static int MAXSANITYLVL = 5;
+	private final static int MAXHEALTLVL = 3;
+	private final static int MAXSANITYLVL = 3;
 	private final static int MAXRADIOACTIVITYLVL = 5;
-	private final static int THIRSTTRESHOLD = 3;
-	private final static int STARVATIONTRESHOLD = 3;
 	private int daysSurvived;
-	private int thirst;
+	private int waterLvl;
 	private int hungerLvl;
 	private int healtLvl;
 	private int sanityLvl;
@@ -42,10 +40,10 @@ public class Player {
 
 	public Player(String name) {
 		this.name = name;
-		daysSurvived = 0;
+		daysSurvived = 1;
 		isThirsty = false;
 		isStarving = false;
-		thirst = MAXTHIRST;
+		waterLvl = MAXWATERLVL;
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
 		sanityLvl = MAXSANITYLVL;
@@ -74,8 +72,8 @@ public class Player {
 		return hungerLvl;
 	}
 
-	public int getThirst() {
-		return thirst;
+	public int getWaterLvl() {
+		return waterLvl;
 	}
 
 	public boolean isStarving() {
@@ -99,8 +97,8 @@ public class Player {
 	}
 
 	public void dayPass() {
-		if (thirst > 0) {
-			thirst -= 1;
+		if (waterLvl > 0) {
+			waterLvl -= 1;
 		}
 
 		if (hungerLvl > 0) {
@@ -110,20 +108,21 @@ public class Player {
 		if (hungerLvl > 0) {
 			sanityLvl -= 1;
 		}
-		if (thirst < THIRSTTRESHOLD)
+
+		if (waterLvl < 3)
 			isThirsty = true;
-		if (hungerLvl < STARVATIONTRESHOLD)
+		if (hungerLvl < 3)
 			isStarving = true;
-		if (hungerLvl == 0 || thirst == 0) {
+		if (hungerLvl == 0 || waterLvl == 0) {
 			healtLvl = 0;
 		}
 		if (sanityLvl == 0) {
 			healtLvl -= 1;
 		}
-		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
+		if (radioactivityLvl == 5) {
 			healtLvl -= 1;
 		}
-
+		
 		daysSurvived++;
 	}
 
@@ -141,7 +140,7 @@ public class Player {
 	}
 
 	public void dispInventory() {
-		inventory.displayInventory();
+		inventory.affichage();
 	}
 
 	public void dispHealtLvl() {
@@ -157,7 +156,7 @@ public class Player {
 	}
 
 	public void dispWaterLvl() {
-		for (int i = 0; i < thirst; i++)
+		for (int i = 0; i < waterLvl; i++)
 			System.out.print("💧");
 		System.out.println();
 	}
@@ -174,28 +173,21 @@ public class Player {
 		System.out.println();
 	}
 
-	public void eat() {
-		if (hungerLvl <= MAXHUNGERLVL) 
-			hungerLvl = hungerLvl + 2;
-		if (hungerLvl > STARVATIONTRESHOLD)
-			isStarving = false;
+	public void isEating() {
+		if(hungerLvl<=MAXHUNGERLVL) {
+			hungerLvl=hungerLvl+2;
+		} 
 	}
 
-	public void drink() {
-		if (thirst <= MAXTHIRST)
-			thirst = thirst + 2;
-		if (thirst > THIRSTTRESHOLD)
-			isThirsty = false;
-	}
-	
-	public void increaseRadiation() {
-		if(radioactivityLvl < MAXRADIOACTIVITYLVL)
-			radioactivityLvl++;
+	public void isDrinking() {
+		if (waterLvl <= MAXWATERLVL) {
+			waterLvl = waterLvl + 2;
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Player [NAME=" + name + ", waterLvl=" + thirst + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
+		return "Player [NAME=" + name + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
@@ -208,7 +200,7 @@ public class Player {
     	JSONArray inventaire = new JSONArray();
 
     	json.put("daysSurvived", daysSurvived);
-		json.put("waterlvl", thirst);
+		json.put("waterlvl", waterLvl);
 		json.put("hungerlvl", hungerLvl);
 		json.put("healtlvl", healtLvl);
 		json.put("sanitylvl", sanityLvl);
@@ -229,5 +221,5 @@ public class Player {
         }
 
     }
-	
+
 }

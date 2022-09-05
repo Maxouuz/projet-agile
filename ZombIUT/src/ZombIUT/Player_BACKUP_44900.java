@@ -1,5 +1,6 @@
 package ZombIUT;
 
+<<<<<<< HEAD
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,8 +20,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+
+=======
+>>>>>>> c20f996f45f47574ececd1fd37acf619e4232ab2
 public class Player {
-	
 	private String name;
 	private final static int MAXTHIRST = 3;
 	private final static int MAXHUNGERLVL = 3;
@@ -201,14 +204,14 @@ public class Player {
 	}
 	
 	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
+	 * *//*
     public void toJSON(){
         // Instanciation du créateur de JSON
     	JSONObject json = new JSONObject();
     	JSONArray inventaire = new JSONArray();
 
     	json.put("daysSurvived", daysSurvived);
-		json.put("waterlvl", thirst);
+		json.put("waterlvl", waterLvl);
 		json.put("hungerlvl", hungerLvl);
 		json.put("healtlvl", healtLvl);
 		json.put("sanitylvl", sanityLvl);
@@ -228,6 +231,8 @@ public class Player {
             e.printStackTrace();
         }
 
-    }
+    }*/
+
+	public void toJSON() {}
 	
 }

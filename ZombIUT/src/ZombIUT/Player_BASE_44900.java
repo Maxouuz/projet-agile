@@ -9,28 +9,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.io.Writer;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
 
 
 public class Player {
-	
 	private String name;
-	private final static int MAXTHIRST = 3;
+	private final static int MAXWATERLVL = 3;
 	private final static int MAXHUNGERLVL = 3;
-	private final static int MAXHEALTLVL = 5;
-	private final static int MAXSANITYLVL = 5;
+	private final static int MAXHEALTLVL = 3;
+	private final static int MAXSANITYLVL = 3;
 	private final static int MAXRADIOACTIVITYLVL = 5;
-	private final static int THIRSTTRESHOLD = 3;
-	private final static int STARVATIONTRESHOLD = 3;
 	private int daysSurvived;
-	private int thirst;
+	private int waterLvl;
 	private int hungerLvl;
 	private int healtLvl;
 	private int sanityLvl;
@@ -42,10 +35,10 @@ public class Player {
 
 	public Player(String name) {
 		this.name = name;
-		daysSurvived = 0;
+		daysSurvived = 1;
 		isThirsty = false;
 		isStarving = false;
-		thirst = MAXTHIRST;
+		waterLvl = MAXWATERLVL;
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
 		sanityLvl = MAXSANITYLVL;
@@ -74,8 +67,8 @@ public class Player {
 		return hungerLvl;
 	}
 
-	public int getThirst() {
-		return thirst;
+	public int getWaterLvl() {
+		return waterLvl;
 	}
 
 	public boolean isStarving() {
@@ -99,8 +92,8 @@ public class Player {
 	}
 
 	public void dayPass() {
-		if (thirst > 0) {
-			thirst -= 1;
+		if (waterLvl > 0) {
+			waterLvl -= 1;
 		}
 
 		if (hungerLvl > 0) {
@@ -110,20 +103,21 @@ public class Player {
 		if (hungerLvl > 0) {
 			sanityLvl -= 1;
 		}
-		if (thirst < THIRSTTRESHOLD)
+
+		if (waterLvl < 3)
 			isThirsty = true;
-		if (hungerLvl < STARVATIONTRESHOLD)
+		if (hungerLvl < 3)
 			isStarving = true;
-		if (hungerLvl == 0 || thirst == 0) {
+		if (hungerLvl == 0 || waterLvl == 0) {
 			healtLvl = 0;
 		}
 		if (sanityLvl == 0) {
 			healtLvl -= 1;
 		}
-		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
+		if (radioactivityLvl == 5) {
 			healtLvl -= 1;
 		}
-
+		
 		daysSurvived++;
 	}
 
@@ -141,7 +135,7 @@ public class Player {
 	}
 
 	public void dispInventory() {
-		inventory.displayInventory();
+		inventory.affichage();
 	}
 
 	public void dispHealtLvl() {
@@ -157,7 +151,7 @@ public class Player {
 	}
 
 	public void dispWaterLvl() {
-		for (int i = 0; i < thirst; i++)
+		for (int i = 0; i < waterLvl; i++)
 			System.out.print("💧");
 		System.out.println();
 	}
@@ -174,28 +168,21 @@ public class Player {
 		System.out.println();
 	}
 
-	public void eat() {
-		if (hungerLvl <= MAXHUNGERLVL) 
-			hungerLvl = hungerLvl + 2;
-		if (hungerLvl > STARVATIONTRESHOLD)
-			isStarving = false;
+	public void isEating() {
+		if(hungerLvl<=MAXHUNGERLVL) {
+			hungerLvl=hungerLvl+2;
+		} 
 	}
 
-	public void drink() {
-		if (thirst <= MAXTHIRST)
-			thirst = thirst + 2;
-		if (thirst > THIRSTTRESHOLD)
-			isThirsty = false;
-	}
-	
-	public void increaseRadiation() {
-		if(radioactivityLvl < MAXRADIOACTIVITYLVL)
-			radioactivityLvl++;
+	public void isDrinking() {
+		if (waterLvl <= MAXWATERLVL) {
+			waterLvl = waterLvl + 2;
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Player [NAME=" + name + ", waterLvl=" + thirst + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
+		return "Player [NAME=" + name + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
@@ -204,24 +191,23 @@ public class Player {
 	 * */
     public void toJSON(){
         // Instanciation du créateur de JSON
-    	JSONObject json = new JSONObject();
-    	JSONArray inventaire = new JSONArray();
-
-    	json.put("daysSurvived", daysSurvived);
-		json.put("waterlvl", thirst);
-		json.put("hungerlvl", hungerLvl);
-		json.put("healtlvl", healtLvl);
-		json.put("sanitylvl", sanityLvl);
-		
-		for(Map.Entry<Ressources, Integer> entry: inventory.getInventory().entrySet())
-		{
-			inventaire.put(entry.getKey());
-			inventaire.put(entry.getValue());
-		}
-        // Ecriture du texte dans le fichier:
-        try(Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")){
-    		json.write(fichier, 4, 0);
-    		inventaire.write(fichier);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        // Convertion de la HashMap en texte
+        String nom = gson.toJson(name);
+        String daysurvived = gson.toJson(daysSurvived);
+        String waterlvl = gson.toJson(waterLvl);
+        String hungerlvl = gson.toJson(hungerLvl);
+        String sanitylvl = gson.toJson(sanityLvl);
+        String healtlvl = gson.toJson(healtLvl);
+        String inventaire =  gson.toJson(inventory);
+        // Ecriture du texte dans le fichier: Sauvegarde.json
+        try(FileWriter fichier = new FileWriter("Sauvegarde.json")){
+            fichier.write(nom);
+            fichier.write(healtlvl);
+            fichier.write(hungerlvl);
+            fichier.write(waterlvl);
+            fichier.write(sanitylvl);
+        	fichier.write(inventaire);
             fichier.close();
         } catch(IOException e){
             System.out.println("Impossible de créer le fichier !");
@@ -229,5 +215,5 @@ public class Player {
         }
 
     }
-	
+
 }

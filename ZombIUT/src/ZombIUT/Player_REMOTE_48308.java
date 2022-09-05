@@ -1,26 +1,6 @@
 package ZombIUT;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-
 public class Player {
-	
 	private String name;
 	private final static int MAXTHIRST = 3;
 	private final static int MAXHUNGERLVL = 3;
@@ -201,33 +181,34 @@ public class Player {
 	}
 	
 	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
+	 * *//*
     public void toJSON(){
         // Instanciation du créateur de JSON
-    	JSONObject json = new JSONObject();
-    	JSONArray inventaire = new JSONArray();
-
-    	json.put("daysSurvived", daysSurvived);
-		json.put("waterlvl", thirst);
-		json.put("hungerlvl", hungerLvl);
-		json.put("healtlvl", healtLvl);
-		json.put("sanitylvl", sanityLvl);
-		
-		for(Map.Entry<Ressources, Integer> entry: inventory.getInventory().entrySet())
-		{
-			inventaire.put(entry.getKey());
-			inventaire.put(entry.getValue());
-		}
-        // Ecriture du texte dans le fichier:
-        try(Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")){
-    		json.write(fichier, 4, 0);
-    		inventaire.write(fichier);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        // Convertion de la HashMap en texte
+        String nom = gson.toJson(name);
+        String daysurvived = gson.toJson(daysSurvived);
+        String waterlvl = gson.toJson(waterLvl);
+        String hungerlvl = gson.toJson(hungerLvl);
+        String sanitylvl = gson.toJson(sanityLvl);
+        String healtlvl = gson.toJson(healtLvl);
+        String inventaire =  gson.toJson(inventory);
+        // Ecriture du texte dans le fichier: Sauvegarde.json
+        try(FileWriter fichier = new FileWriter("Sauvegarde.json")){
+            fichier.write(nom);
+            fichier.write(healtlvl);
+            fichier.write(hungerlvl);
+            fichier.write(waterlvl);
+            fichier.write(sanitylvl);
+        	fichier.write(inventaire);
             fichier.close();
         } catch(IOException e){
             System.out.println("Impossible de créer le fichier !");
             e.printStackTrace();
         }
 
-    }
+    }*/
+
+	public void toJSON() {}
 	
 }

@@ -17,6 +17,5 @@ public enum Ressources {
     public int getPlace() {
         return place;
     }
-    
 
 }
