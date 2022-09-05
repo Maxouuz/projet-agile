@@ -122,6 +122,9 @@ public class Player {
 		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
 			healtLvl -= 1;
 		}
+		if (hungerLvl == 0 && thirst == 0) {
+			healtLvl -=1;
+		}
 
 		daysSurvived++;
 	}
@@ -143,6 +146,9 @@ public class Player {
 		inventory.displayInventory();
 	}
 
+	public void minusHealtLvl(int newHeal) {
+		healtLvl = healtLvl-newHeal; 
+	}
 	public void dispHealtLvl() {
 		for (int i = 0; i < healtLvl; i++)
 			System.out.print("❤️");

@@ -92,7 +92,7 @@ public class Survie {
 
 			if(choix=='1') {
 				if(!p.getInventory().inventory.containsKey(Ressources.MASQUE)) {
-				
+					p.minusHealtLvl(1);
 				}
 				// Choix evenement
 				Events e = new Events();
@@ -104,7 +104,7 @@ public class Survie {
 			System.out.println(Menu.ANSI_RED+"La nuit tombe"+Menu.ANSI_RESET);
 
 			try {
-				TimeUnit.SECONDS.sleep(4);
+				TimeUnit.SECONDS.sleep(2);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,10 +113,11 @@ public class Survie {
 			p.dayPass();
 			
 			
-			if(p.getThirst() == 0 && dayWithoutDrink == 3) {
+			if((p.getThirst() == 0 && dayWithoutDrink == 1)|| p.getHealtLvl()<=0) {
 				dead=true;
 				System.out.println(Menu.ANSI_RED_BACKGROUND+"Vous êtes mort le jour :"+p.getDaysSurvived());
 			}
+			
 		}
 		writeScore(p);
 		p.toJSON();

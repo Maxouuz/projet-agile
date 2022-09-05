@@ -45,7 +45,6 @@ public class Events {
 		int alea=0;
 		while (res.equals("")) {
 			alea = new Random().nextInt(lines.size());
-			System.out.println("valeur aleatoire tire: " + alea);
 			if (lines.get(alea).get(5).equals("0")) {
 				res= lines.get(alea).get(0).toString();
 				lines.get(alea).set(5, Integer.parseInt( lines.get(alea).get(5) + 1) + "");
