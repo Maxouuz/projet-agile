@@ -14,7 +14,6 @@ public class Survie {
 		boolean dead=false;
 		int choix = 0;
 		int dayWithoutDrink = 0;
-		Events events = new Events();
 		while(!dead) {
 			// Choix d'action
 			if(p.getDaysSurvived()%5==0) {
@@ -92,9 +91,14 @@ public class Survie {
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
+				if(!p.getInventory().inventory.containsKey(Ressources.MASQUE)) {
+				
+				}
 				// Choix evenement
-				events.dropEvent();
-				System.out.println(Menu.ANSI_YELLOW+"La porte est bloqué"+Menu.ANSI_RESET);
+				Events e = new Events();
+				e.collecteDonner();
+				e.dropEvent(p);
+
 			}
 			
 			System.out.println(Menu.ANSI_RED+"La nuit tombe"+Menu.ANSI_RESET);

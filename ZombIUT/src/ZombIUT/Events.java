@@ -10,11 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Events {
 
 	private String separator = File.separator;
-	private String path = Paths.get(".").normalize().toAbsolutePath() + separator + "src/tmp/Events.csv";
+	private String path = Paths.get(".").normalize().toAbsolutePath() + separator + "ressources/Events.csv";
 	private List<List<String>> lines = new ArrayList();
 
 
@@ -39,16 +40,19 @@ public class Events {
 	}
 
 	
-	public String dropEvent() {
+	public void dropEvent(Player p ) {
 		String res = "";
-
+		int alea=0;
 		while (res.equals("")) {
-			int alea = new Random().nextInt(lines.size());
+			alea = new Random().nextInt(lines.size());
 			System.out.println("valeur aleatoire tire: " + alea);
 			if (lines.get(alea).get(5).equals("0")) {
-				res = lines.get(alea).get(0).toString();
+				res= lines.get(alea).get(0).toString();
 				lines.get(alea).set(5, Integer.parseInt( lines.get(alea).get(5) + 1) + "");
+				
+				
 			}
+			
 		}
 		
 		for (int i = 0; i < lines.size(); i++) {
@@ -56,7 +60,49 @@ public class Events {
 				lines.get(i).set(5, "0");
 			}
 		}
-		
-		return res;
+		System.out.println(res+" (o/n)");
+		choice(alea,p);
 	}
+	public void choice(int alea,Player p) {
+		
+		Scanner sc = new Scanner(System.in);
+		String res = sc.nextLine();
+		boolean isTrue=true;
+		while(isTrue) {
+			if(res.equals("o")){
+				Ressources r = Ressources.valueOf(lines.get(alea).get(3).toString());
+				if(p.getInventory().inventory.containsKey(r)) {
+					System.out.println( lines.get(alea).get(1).toString());
+					isTrue = false;
+					perteOuGain(alea, p, 3);
+				}else {
+					System.out.println("Vous n'avez pas l'objet necessaire pour faire cette quête");
+					isTrue = false;
+				}
+			}else if(res.equals("n")){
+				Ressources r = Ressources.valueOf(lines.get(alea).get(6).toString());
+				if(p.getInventory().inventory.containsKey(r)) {
+					System.out.println(lines.get(alea).get(2).toString());
+					isTrue = false;
+					perteOuGain(alea, p, 6);
+				}else {
+					System.out.println("Vous n'avez pas l'objet necessaire pour faire cette quête");
+					isTrue = false;
+				}
+			}else {
+				System.out.println("o/n");
+			}
+		}
+	}
+	
+	public void perteOuGain(int alea,Player p,int vf) {
+		Ressources r = Ressources.valueOf(lines.get(alea).get(vf).toString());
+		p.getInventory().addRemove(r, lines.get(alea).get(vf+1).toString());
+		
+		
+		
+		
+		
+	}
+	
 }

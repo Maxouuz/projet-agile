@@ -148,6 +148,7 @@ public class Player {
 			System.out.print("❤️");
 		System.out.println();
 	}
+	
 
 	public void dispRadioactivityLvl() {
 		for (int i = 0; i < radioactivityLvl; i++)

@@ -11,24 +11,36 @@ public class Lane {
     
     public Lane() {
         int i = 0;
-        while(i < SIZE) {
-            Random randPres = new Random();
-            //Random randObject = new Random();
-            if(randPres.nextInt(4) == 0){
-            	int rand=randPres.nextInt(8);
-            	for(Ressources r : Ressources.values()) {
-            		if(rand==r.getPlace()) {
+        int nbObjets=0;
+        boolean isTrue=true;
+        while (isTrue) {
+        	while(i < SIZE ) {
+        		Random randPres = new Random();
+        		//	Random randObject = new Random();
+            	if(randPres.nextInt(4) == 0){
+            		nbObjets++;
+            		int rand=randPres.nextInt(8);
+            		for(Ressources r : Ressources.values()) {
+            			if(rand==r.getPlace()) {
             			stuff.add(r.getNom());
+            			}
             		}
-            	}
                 
-            }else {
-                //randObject.doubles
-                stuff.add("   ");
-            }
+            	}else {
+            		//	randObject.doubles
+            		stuff.add("   ");
+            	}
             
-            i++;
+            	i++;
+        	}
+        	
+        	if(nbObjets>=5) {
+        		isTrue = false;
+        	}else {
+        		stuff.clear();
+        	}
         }
+        
     }
     
     protected boolean allowDisplacement(Coordonates playerPosition, int displacement) {
