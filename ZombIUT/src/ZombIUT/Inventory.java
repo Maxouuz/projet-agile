@@ -23,15 +23,15 @@ public class Inventory {
 		inventory.remove(c, quantity);
 	}
 
-	public void affichage() {
+	public void displayInventory() {
 		inventory.forEach((key, value) -> {
 			System.out.print("Vous avez: " + value + " de " + key + "\n");
 
 		});
-		System.out.println("Vous disposez de " + compteObjets() + " objets");
+		System.out.println("Vous disposez de " + countObjects() + " objets");
 	}
 
-	public int compteObjets() {
+	public int countObjects() {
 		int total = 0;
 		for (Integer x : inventory.values()) {
 			total += x;
@@ -47,7 +47,7 @@ public class Inventory {
 		return inventory.containsKey(r);
 	}
 
-	public void remplacer(Ressources r1, int quantity, Ressources r2, int quantity2) {
+	public void replace(Ressources r1, int quantity, Ressources r2, int quantity2) {
 		inventory.forEach((key, value) -> {
 			if (key == r1) {
 				remove(r1, quantity);

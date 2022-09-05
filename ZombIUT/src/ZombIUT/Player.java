@@ -121,7 +121,7 @@ public class Player {
 	}
 
 	public void dispInventory() {
-		inventory.affichage();
+		inventory.displayInventory();
 	}
 
 	public void dispHealtLvl() {

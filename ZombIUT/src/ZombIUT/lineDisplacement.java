@@ -23,7 +23,7 @@ public class lineDisplacement {
             			
         
             		
-            }while( p.getInventory().compteObjets()<5);
+            }while( p.getInventory().countObjects()<5);
             System.out.println("Vous avez récupéré 5 objets ! Vous n'avez plus de place et vous devez maintenant survivre.");
     }
 }
