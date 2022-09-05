@@ -250,13 +250,13 @@ public class Player {
 			this.name = fichier.toString();
 			this.sanityLvl = (int) jsonO.get("sanitylvl");
 			
-			JSONArray inventaire = new JSONArray(fichier);
+			JSONArray inventaire = jsonO.getJSONArray("inventaire");
 			
 			for (int i = 0; i < inventaire.length(); i++) {
-				String key = inventaire.getString(i);
-				String value = jsonO.getString(key);
-				Ressources r = Ressources.valueOf(key);
-				inventory.add(r, Integer.parseInt(value));
+				JSONObject key = inventaire.getJSONObject(i);
+				int value = key.getInt("quantite");
+				Ressources r = Ressources.valueOf(key.getString("nom"));
+				inventory.add(r, value);
 			}
 
 		} catch (Exception e) {
