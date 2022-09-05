@@ -14,29 +14,31 @@ public class Survie {
 		boolean dead=false;
 		int choix = 0;
 		int dayWithoutDrink = 0;
+		Events events = new Events();
 		while(!dead) {
 			// Choix d'action
 			Menu.clearScreen();
-			System.out.println("Jour :"+p.getDaysSurvived());
-			System.out.println("Votre Status :");
+			System.out.println(Menu.ANSI_RED_BACKGROUND+"Jour :"+p.getDaysSurvived()+Menu.ANSI_RESET);
+			System.out.println("Votre Status :"+Menu.ANSI_RESET);
 			// afficher les barres
-			p.dispWaterLvl();
+			p.dispHealtLvl();
 			p.dispHungerLvl();
+			p.dispWaterLvl();
 
 			
 			if(p.isStarving()) {
-				System.out.println("Il a faim");
+				System.out.println(Menu.ANSI_RED+"Il a faim"+Menu.ANSI_RESET);
 			}
 		    if(p.isThirsty()) {
-		    	System.out.println("Il a soif");
+		    	System.out.println(Menu.ANSI_RED+"Il a soif"+Menu.ANSI_RESET);
 		    }
 			
-			System.out.println("Inventaire :");
+			System.out.println(Menu.ANSI_RED+"Inventaire :"+Menu.ANSI_RESET);
 			p.dispInventory();
 			System.out.println();
 
 			
-			System.out.println("Voulez-vous manger ? 1: Oui 2: Non");
+			System.out.println(Menu.ANSI_RED_BACKGROUND+"Voulez-vous manger ? 1: Oui 2: Non"+Menu.ANSI_RESET);
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
@@ -44,13 +46,13 @@ public class Survie {
 					p.eat();
 					p.getInventory().remove(Ressources.valueOf("PAIN"), 1);
 				} else {
-					System.out.println("Vous n'avez pas de quoi manger");
+					System.out.println(Menu.ANSI_YELLOW+"Vous n'avez pas de quoi manger"+Menu.ANSI_RESET);
 				}
 
 			} 
 
 			
-			System.out.println("Voulez-vous boire ? 1: Oui 2: Non");
+			System.out.println(Menu.ANSI_RED_BACKGROUND+"Voulez-vous boire ? 1: Oui 2: Non"+Menu.ANSI_RESET);
 			
 			choix = Survie.saisie1ou2();
 			
@@ -59,7 +61,7 @@ public class Survie {
 					p.drink();
 					p.getInventory().remove(Ressources.valueOf("EAU"), 1);	
 				}else {
-					System.out.println("Vous n'avez pas de quoi boire");
+					System.out.println(Menu.ANSI_YELLOW+"Vous n'avez pas de quoi boire"+Menu.ANSI_RESET);
 					if(p.getThirst() == 0) {
 						dayWithoutDrink++;
 					}
@@ -75,19 +77,20 @@ public class Survie {
 			
 			
 			
-			System.out.println("Voulez-vous sortir ? 1: Oui 2: Non");
+			System.out.println(Menu.ANSI_RED_BACKGROUND+"Voulez-vous sortir ? 1: Oui 2: Non"+Menu.ANSI_RESET);
 			// si oui : evenement aleatoire 
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
 				// Choix evenement
-				System.out.println("La porte est bloqué");
+				events.dropEvent();
+				System.out.println(Menu.ANSI_YELLOW+"La porte est bloqué"+Menu.ANSI_RESET);
 			}
 			
-			System.out.println("La nuit tombe");
+			System.out.println(Menu.ANSI_RED+"La nuit tombe"+Menu.ANSI_RESET);
 
 			try {
-				TimeUnit.SECONDS.sleep(2);
+				TimeUnit.SECONDS.sleep(4);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -98,7 +101,7 @@ public class Survie {
 			
 			if(p.getThirst() == 0 && dayWithoutDrink == 3) {
 				dead=true;
-				System.out.println("Vous êtes mort le jour :"+p.getDaysSurvived());
+				System.out.println(Menu.ANSI_RED_BACKGROUND+"Vous êtes mort le jour :"+p.getDaysSurvived());
 			}
 		}
 		writeScore(p);
@@ -111,7 +114,7 @@ public class Survie {
 	public static char saisie1ou2() {
 		String chaine = sc.nextLine();
 		while (chaine.equals("") || chaine.charAt(0) - '0' < 1 || chaine.charAt(0) - '0' > 2 || chaine.length() != 1) {
-			System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : ");			
+			System.out.print("\t\t Saisie invalide, veuillez entrer un chiffre valide : "+Menu.ANSI_RESET);			
 
 			chaine = sc.nextLine();
 		}

@@ -241,11 +241,13 @@ public class Player {
 			this.name = fichier.toString();
 			this.sanityLvl = (int) jsonO.get("sanitylvl");
 			
-			JSONArray inventaire = new JSONArray();
+			JSONArray inventaire = new JSONArray(fichier);
 			
-			for (Map.Entry<Ressources, Integer> entry : inventory.getInventory().entrySet()) {
-				inventaire.put(entry.getKey());
-				inventaire.put(entry.getValue());
+			for (int i = 0; i < inventaire.length(); i++) {
+				String key = inventaire.getString(i);
+				String value = jsonO.getString(key);
+				Ressources r = Ressources.valueOf(key);
+				inventory.add(r, Integer.parseInt(value));
 			}
 			
 			System.out.println(daysSurvived + " test" + healtLvl);
