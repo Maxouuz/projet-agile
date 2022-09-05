@@ -1,29 +1,16 @@
 package ZombIUT;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
-
-
 public class Player {
 	private String name;
-	private final static int MAXWATERLVL = 3;
-	private final static int MAXHUNGERLVL = 3;
-	private final static int MAXHEALTLVL = 3;
-	private final static int MAXSANITYLVL = 3;
+	private final static int MAXTHIRST = 5;
+	private final static int MAXHUNGERLVL = 5;
+	private final static int MAXHEALTLVL = 5;
+	private final static int MAXSANITYLVL = 5;
 	private final static int MAXRADIOACTIVITYLVL = 5;
+	private final static int THIRSTTRESHOLD = 3;
+	private final static int STARVATIONTRESHOLD = 3;
 	private int daysSurvived;
-	private int waterLvl;
+	private int thirst;
 	private int hungerLvl;
 	private int healtLvl;
 	private int sanityLvl;
@@ -35,10 +22,10 @@ public class Player {
 
 	public Player(String name) {
 		this.name = name;
-		daysSurvived = 1;
+		daysSurvived = 0;
 		isThirsty = false;
 		isStarving = false;
-		waterLvl = MAXWATERLVL;
+		thirst = MAXTHIRST;
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
 		sanityLvl = MAXSANITYLVL;
@@ -67,8 +54,8 @@ public class Player {
 		return hungerLvl;
 	}
 
-	public int getWaterLvl() {
-		return waterLvl;
+	public int getThirst() {
+		return thirst;
 	}
 
 	public boolean isStarving() {
@@ -92,8 +79,8 @@ public class Player {
 	}
 
 	public void dayPass() {
-		if (waterLvl > 0) {
-			waterLvl -= 1;
+		if (thirst > 0) {
+			thirst -= 1;
 		}
 
 		if (hungerLvl > 0) {
@@ -103,21 +90,20 @@ public class Player {
 		if (hungerLvl > 0) {
 			sanityLvl -= 1;
 		}
-
-		if (waterLvl < 3)
+		if (thirst < THIRSTTRESHOLD)
 			isThirsty = true;
-		if (hungerLvl < 3)
+		if (hungerLvl < STARVATIONTRESHOLD)
 			isStarving = true;
-		if (hungerLvl == 0 || waterLvl == 0) {
+		if (hungerLvl == 0 || thirst == 0) {
 			healtLvl = 0;
 		}
 		if (sanityLvl == 0) {
 			healtLvl -= 1;
 		}
-		if (radioactivityLvl == 5) {
+		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
 			healtLvl -= 1;
 		}
-		
+
 		daysSurvived++;
 	}
 
@@ -151,7 +137,7 @@ public class Player {
 	}
 
 	public void dispWaterLvl() {
-		for (int i = 0; i < waterLvl; i++)
+		for (int i = 0; i < thirst; i++)
 			System.out.print("💧");
 		System.out.println();
 	}
@@ -168,27 +154,34 @@ public class Player {
 		System.out.println();
 	}
 
-	public void isEating() {
-		if(hungerLvl<=MAXHUNGERLVL) {
-			hungerLvl=hungerLvl+2;
-		} 
+	public void eat() {
+		if (hungerLvl <= MAXHUNGERLVL) 
+			hungerLvl = hungerLvl + 2;
+		if (hungerLvl > STARVATIONTRESHOLD)
+			isStarving = false;
 	}
 
-	public void isDrinking() {
-		if (waterLvl <= MAXWATERLVL) {
-			waterLvl = waterLvl + 2;
-		}
+	public void drink() {
+		if (thirst <= MAXTHIRST)
+			thirst = thirst + 2;
+		if (thirst > THIRSTTRESHOLD)
+			isThirsty = false;
+	}
+	
+	public void increaseRadiation() {
+		if(radioactivityLvl < MAXRADIOACTIVITYLVL)
+			radioactivityLvl++;
 	}
 
 	@Override
 	public String toString() {
-		return "Player [NAME=" + name + ", waterLvl=" + waterLvl + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
+		return "Player [NAME=" + name + ", waterLvl=" + thirst + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
 				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
 	
 	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
+	 * *//*
     public void toJSON(){
         // Instanciation du créateur de JSON
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -214,6 +207,8 @@ public class Player {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
+	public void toJSON() {}
+	
 }

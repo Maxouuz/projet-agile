@@ -44,7 +44,7 @@ public class Survie {
 			choix = Survie.saisie1ou2();
 
 			if(choix=='1') {
-				p.isEating();
+				p.eat();
 			} else {
 
 			}
@@ -54,9 +54,9 @@ public class Survie {
 
 			choix = Survie.saisie1ou2();
 			if(choix=='1') {
-				p.isDrinking();
+				p.drink();
 			} else {
-				if(p.getWaterLvl() == 0) {
+				if(p.getThirst() == 0) {
 					dayWithoutDrink++;
 				}
 			}
@@ -82,7 +82,7 @@ public class Survie {
 			p.dayPass();
 			
 			
-			if(p.getWaterLvl() == 0 && dayWithoutDrink == 3) {
+			if(p.getThirst() == 0 && dayWithoutDrink == 3) {
 				dead=true;
 				System.out.println("Vous êtes mort le jour :"+p.getDaysSurvived());
 			}
