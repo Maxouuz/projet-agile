@@ -41,7 +41,7 @@ public class Menu {
 				System.out.println(p);
 				// mettre le jeu
 				clearScreen();
-				lineDisplacement.play();
+				lineDisplacement.play(p);
 				Survie.play(p);
 
 			} else if (x=='2') {
