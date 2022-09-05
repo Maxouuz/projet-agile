@@ -1,21 +1,11 @@
 package ZombIUT;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -25,15 +15,13 @@ public class Player {
 	private final static int MAXTHIRST = 3;
 	private final static int MAXHUNGERLVL = 3;
 	private final static int MAXHEALTLVL = 5;
-	private final static int MAXSANITYLVL = 5;
 	private final static int MAXRADIOACTIVITYLVL = 5;
-	private final static int THIRSTTRESHOLD = 3;
-	private final static int STARVATIONTRESHOLD = 3;
+	private final static int THIRSTTRESHOLD = 1;
+	private final static int STARVATIONTRESHOLD = 1;
 	private int daysSurvived;
 	private int thirst;
 	private int hungerLvl;
 	private int healtLvl;
-	private int sanityLvl;
 	private int radioactivityLvl;
 	private boolean isThirsty;
 	private boolean isStarving;
@@ -48,7 +36,6 @@ public class Player {
 		thirst = MAXTHIRST;
 		hungerLvl = MAXHUNGERLVL;
 		healtLvl = MAXHEALTLVL;
-		sanityLvl = MAXSANITYLVL;
 		radioactivityLvl = 0;
 		inventory = new Inventory();
 		position = new Coordonates(0, 0);
@@ -56,10 +43,6 @@ public class Player {
 
 	public int getRadioactivityLvl() {
 		return radioactivityLvl;
-	}
-
-	public int getSanityLvl() {
-		return sanityLvl;
 	}
 
 	public int getHealtLvl() {
@@ -107,18 +90,12 @@ public class Player {
 			hungerLvl -= 1;
 		}
 
-		if (hungerLvl > 0) {
-			sanityLvl -= 1;
-		}
-		if (thirst < THIRSTTRESHOLD)
+		if (thirst <= THIRSTTRESHOLD)
 			isThirsty = true;
-		if (hungerLvl < STARVATIONTRESHOLD)
+		if (hungerLvl <= STARVATIONTRESHOLD)
 			isStarving = true;
 		if (hungerLvl == 0 || thirst == 0) {
 			healtLvl = 0;
-		}
-		if (sanityLvl == 0) {
-			healtLvl -= 1;
 		}
 		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
 			healtLvl -= 1;
@@ -168,12 +145,6 @@ public class Player {
 		System.out.println();
 	}
 
-	public void dispSanityLvl() {
-		for (int i = 0; i < sanityLvl; i++)
-			System.out.print("🧼");
-		System.out.println();
-	}
-
 	public void eat() {
 		if (hungerLvl <= MAXHUNGERLVL) 
 			hungerLvl = hungerLvl + 2;
@@ -196,7 +167,7 @@ public class Player {
 	@Override
 	public String toString() {
 		return "Player [NAME=" + name + ", waterLvl=" + thirst + ", hungerLvl=" + hungerLvl + ", healtLvl=" + healtLvl
-				+ ", sanityLvl=" + sanityLvl + ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
+				+ ", radioactivityLvl=" + radioactivityLvl + ", isThirsty=" + isThirsty
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
 	
@@ -211,7 +182,6 @@ public class Player {
 		json.put("waterlvl", thirst);
 		json.put("hungerlvl", hungerLvl);
 		json.put("healtlvl", healtLvl);
-		json.put("sanitylvl", sanityLvl);
 		
 		for(Map.Entry<Ressources, Integer> entry: inventory.getInventory().entrySet())
 		{
