@@ -219,7 +219,7 @@ public class Player {
 			inventaire.put(entry.getValue());
 		}
 		// Ecriture du texte dans le fichier:
-		try (Writer fichier = new FileWriter(getName() + ".json")) {
+		try (Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")) {
 			json.write(fichier, 4, 0);
 			inventaire.write(fichier);
 			fichier.close();
