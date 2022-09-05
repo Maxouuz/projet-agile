@@ -1,21 +1,11 @@
 package ZombIUT;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -200,10 +190,9 @@ public class Player {
 				+ ", isStarving=" + isStarving + ", inventory=" + inventory + ", position=" + position + "]";
 	}
 	
-	/*FORMAT DU FICHIER DE SAUVEGARDE
-	 * */
+	
     public void toJSON(){
-        // Instanciation du créateur de JSON
+        // Instanciation des objects Json
     	JSONObject json = new JSONObject();
     	JSONArray inventaire = new JSONArray();
 
@@ -218,6 +207,8 @@ public class Player {
 			inventaire.put(entry.getKey());
 			inventaire.put(entry.getValue());
 		}
+		json.put("inventory",inventaire);
+		
         // Ecriture du texte dans le fichier:
         try(Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")){
     		json.write(fichier, 4, 0);
