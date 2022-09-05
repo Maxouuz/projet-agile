@@ -128,23 +128,23 @@ public class Lane {
     
     protected boolean questionPick(Coordonates playerPosition) {
     	System.out.println("Ceci est un(e) "+ stuff.get(playerPosition.getX()).toString());
-        System.out.println("Souhaitez vous l'ajouter à votre inventaire ? (o/n)");
+        System.out.println(Menu.ANSI_BLUE_BACKGROUND+"Souhaitez vous l'ajouter à votre inventaire ? (o/n)"+Menu.ANSI_RESET);
         Scanner sc = new Scanner (System.in);
         String choix;
         boolean isTrue = false;
         while(!isTrue) {
         	choix = sc.nextLine();
             if(choix.equals("o")) {
-                System.out.println("Cet objet à été ajouté à votre inventaire");
+                System.out.println(Menu.ANSI_YELLOW+"Cet objet à été ajouté à votre inventaire"+Menu.ANSI_RESET);
                 isTrue = true;
                 return true;
 
             }else if(choix.equals("n")) {
-                System.out.println("L'objet reste sur le sol");
+                System.out.println(Menu.ANSI_CYAN+"L'objet reste sur le sol"+Menu.ANSI_RESET);
                 isTrue = true;
                 return false;
             }else {
-                System.out.println("Veuillez utiliser o ou n");
+                System.out.println(Menu.ANSI_YELLOW+"Veuillez utiliser o ou n"+Menu.ANSI_RESET);
             }
         }
         return true;
@@ -157,14 +157,15 @@ public class Lane {
     }
     
     protected void print(Coordonates playerPosition) {
+    	Menu.clearScreen();
     	System.out.print("|");
         for (int i =0; i<SIZE; i++) {
             if(i==playerPosition.getX()) {
-                System.out.print(" x |");
+                System.out.print(Menu.ANSI_RED+" x"+Menu.ANSI_RESET+" |");
             }else if(stuff.get(i).equals("   ")) {
-                System.out.print(""+ stuff.get(i)+"|");
+                System.out.print(Menu.ANSI_RED+""+ stuff.get(i)+"|"+Menu.ANSI_RESET);
             }else {
-            	System.out.print("***|");
+            	System.out.print(Menu.ANSI_YELLOW+"***"+Menu.ANSI_RESET+"|");
             }
             if(i%5==4 && i<38) {
             	System.out.println();

@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import java.util.Map;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,5 +60,11 @@ public class InventoryTest {
 		assertEquals(0, i.countObjects());
 	}
 	
-	
+	@Test
+	public void getInventoryTest() {
+		i.add(Ressources.CARTE, 1);
+		Map<Ressources, Integer> tmp = i.getInventory();
+		assertTrue(tmp.containsKey(Ressources.CARTE));
+		assertEquals(1, tmp.size());
+	}
 }
