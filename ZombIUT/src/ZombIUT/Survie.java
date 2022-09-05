@@ -14,6 +14,8 @@ public class Survie {
 		boolean dead=false;
 		int choix = 0;
 		int dayWithoutDrink = 0;
+		p.getInventory().add(Ressources.EAU, 2);
+		p.getInventory().add(Ressources.PAIN, 2);
 		while(!dead) {
 			// Choix d'action
 			Menu.clearScreen();
