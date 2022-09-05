@@ -7,16 +7,14 @@ import java.util.Scanner;
 public class lineDisplacement {
 
     public static void main(String[] args) {
-
-        play();
+    	Player p = new Player("name");
+        play(p);
     }
 
-        public static void play() {
-            Player p  = new Player ("jfj");
+        public static void play(Player p) {
 
             Lane l = new Lane();
             l.print(p.getPosition());
-            boolean isTrue = false;
             do {
             	l.pick(p.getPosition(), p.getInventory()); 
     			p.dispInventory();

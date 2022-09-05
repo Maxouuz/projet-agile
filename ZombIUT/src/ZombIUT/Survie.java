@@ -113,7 +113,7 @@ public class Survie {
 		try
 		{
 		 FileWriter fw = new FileWriter("ressources/score.txt",true);
-		 fw.write(""+p.getName()+" :"+p.getDaysSurvived()+"\n");
+		 fw.write(""+p.getName()+" : "+p.getDaysSurvived()+" jours\n");
 		 fw.close();
 		}
 		catch(IOException ioe)
