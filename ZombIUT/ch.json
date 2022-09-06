@@ -1,0 +1,19 @@
+{
+    "sanitylvl": 5,
+    "waterlvl": 3,
+    "hungerlvl": 3,
+    "inventaire": [
+        "CARTE",
+        1,
+        "KIT",
+        1,
+        "PAIN",
+        2,
+        "EAU",
+        3,
+        "HACHE",
+        2
+    ],
+    "healtlvl": 5,
+    "daysSurvived": 0
+}

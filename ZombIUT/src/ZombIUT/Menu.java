@@ -67,6 +67,10 @@ public class Menu {
 				System.out.println(ANSI_RED+"Pseudo :"+ANSI_RESET);
 				Player p = new Player(sc.next());
 				p.jSonToString(p.getName());
+<<<<<<< HEAD
+=======
+				System.out.println("Nombre de jours survecu" + p.getDaysSurvived());
+>>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
 				Survie.play(p);
 			} else if (x=='4'){
 				tabScore.readFile();
@@ -91,7 +95,14 @@ public class Menu {
 
 
 	public static void regle() {
-		System.out.println("Survie à l'IUT !!!");
+		System.out.println("Bienvenue dans Zomb'IUT. Dans ce jeu vous devrez survivre dans un monde apocalyptique plein de rebondissements !  \n"
+				+ "Votre but ? Faire les bons choix afin de survivre le plus longtemps possible ! \n \n"
+				+ "Liste des touches pour la partie 1 : \n"
+				+ "Z : haut\n"
+				+ "Q : gauche\n"
+				+ "S : bas\n"
+				+ "D : droite\n"
+				+ "ATTENTION : SI VOUS SORTEZ TROP SANS MASQUE VOUS RISQUEZ DE PERDRE LA PARTIE !");
 
 	}
 

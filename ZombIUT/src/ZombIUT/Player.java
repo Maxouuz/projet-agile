@@ -10,6 +10,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -122,6 +124,9 @@ public class Player {
 		if (radioactivityLvl == MAXRADIOACTIVITYLVL) {
 			healtLvl -= 1;
 		}
+		if (hungerLvl == 0 && thirst == 0) {
+			healtLvl -=1;
+		}
 
 		daysSurvived++;
 	}
@@ -143,6 +148,9 @@ public class Player {
 		inventory.displayInventory();
 	}
 
+	public void minusHealtLvl(int newHeal) {
+		healtLvl = healtLvl-newHeal; 
+	}
 	public void dispHealtLvl() {
 		for (int i = 0; i < healtLvl; i++)
 			System.out.print("❤️");
@@ -215,14 +223,15 @@ public class Player {
 		json.put("sanitylvl", sanityLvl);
 
 		for (Map.Entry<Ressources, Integer> entry : inventory.getInventory().entrySet()) {
-			inventaire.put(entry.getKey());
-			inventaire.put(entry.getValue());
+			JSONObject obj = new JSONObject();
+			obj.put("nom", entry.getKey());
+			obj.put("quantite", entry.getValue());
+			inventaire.put(obj);
 		}
+		json.put("inventaire", inventaire);
 		// Ecriture du texte dans le fichier:
 		try (Writer fichier = new FileWriter("Sauvegarde de " + getName() + ".json")) {
 			json.write(fichier, 4, 0);
-			inventaire.write(fichier);
-			fichier.close();
 		} catch (IOException e) {
 			System.out.println("Impossible de créer le fichier !");
 			e.printStackTrace();
@@ -231,24 +240,29 @@ public class Player {
 	}
 
 	public void jSonToString(String name) {
-
-		File fichier = new File(name + ".json");
-
+		
 		try {
+			String fichier = Files.readString(Paths.get(name + ".json"));
 			JSONObject jsonO = new JSONObject(fichier);
 			this.daysSurvived = Integer.parseInt(jsonO.get("daysSurvived").toString());
 			this.healtLvl = (int) jsonO.get("healtlvl");
 			this.hungerLvl = (int) jsonO.get("hungerlvl");
 			this.name = fichier.toString();
 			this.sanityLvl = (int) jsonO.get("sanitylvl");
+<<<<<<< HEAD
 
 			JSONArray inventaire = new JSONArray(fichier);
 
+=======
+			
+			JSONArray inventaire = jsonO.getJSONArray("inventaire");
+			
+>>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
 			for (int i = 0; i < inventaire.length(); i++) {
-				String key = inventaire.getString(i);
-				String value = jsonO.getString(key);
-				Ressources r = Ressources.valueOf(key);
-				inventory.add(r, Integer.parseInt(value));
+				JSONObject key = inventaire.getJSONObject(i);
+				int value = key.getInt("quantite");
+				Ressources r = Ressources.valueOf(key.getString("nom"));
+				inventory.add(r, value);
 			}
 
 		} catch (Exception e) {

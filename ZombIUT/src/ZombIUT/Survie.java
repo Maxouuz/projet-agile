@@ -36,10 +36,10 @@ public class Survie {
 
 			
 			if(p.isStarving()) {
-				System.out.println(Menu.ANSI_RED+"Il a faim"+Menu.ANSI_RESET);
+				System.out.println(Menu.ANSI_RED+"Vous avez faim"+Menu.ANSI_RESET);
 			}
 		    if(p.isThirsty()) {
-		    	System.out.println(Menu.ANSI_RED+"Il a soif"+Menu.ANSI_RESET);
+		    	System.out.println(Menu.ANSI_RED+"Vous avez soif"+Menu.ANSI_RESET);
 		    }
 			
 			System.out.println(Menu.ANSI_RED+"Inventaire :"+Menu.ANSI_RESET);
@@ -69,6 +69,7 @@ public class Survie {
 				if(p.getInventory().sameObject(Ressources.valueOf("EAU"))) {
 					p.drink();
 					p.getInventory().remove(Ressources.valueOf("EAU"), 1);	
+					dayWithoutDrink =0;
 				}else {
 					System.out.println(Menu.ANSI_YELLOW+"Vous n'avez pas de quoi boire"+Menu.ANSI_RESET);
 					if(p.getThirst() == 0) {
@@ -92,7 +93,7 @@ public class Survie {
 
 			if(choix=='1') {
 				if(!p.getInventory().inventory.containsKey(Ressources.MASQUE)) {
-				
+					p.minusHealtLvl(1);
 				}
 				// Choix evenement
 				Events e = new Events();
@@ -104,7 +105,7 @@ public class Survie {
 			System.out.println(Menu.ANSI_RED+"La nuit tombe"+Menu.ANSI_RESET);
 
 			try {
-				TimeUnit.SECONDS.sleep(4);
+				TimeUnit.SECONDS.sleep(3);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -113,13 +114,20 @@ public class Survie {
 			p.dayPass();
 			
 			
-			if(p.getThirst() == 0 && dayWithoutDrink == 3) {
+			if((p.getThirst() == 0 && dayWithoutDrink == 3)|| p.getHealtLvl()<=0) {
 				dead=true;
 				System.out.println(Menu.ANSI_RED_BACKGROUND+"Vous êtes mort le jour :"+p.getDaysSurvived());
+				try {
+					TimeUnit.SECONDS.sleep(4);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
 		}
 		writeScore(p);
-		p.toJSON();
+		//p.toJSON();
 
 	}
 
