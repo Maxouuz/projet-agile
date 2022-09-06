@@ -67,10 +67,8 @@ public class Menu {
 				System.out.println(ANSI_RED+"Pseudo :"+ANSI_RESET);
 				Player p = new Player(sc.next());
 				p.jSonToString(p.getName());
-<<<<<<< HEAD
-=======
+
 				System.out.println("Nombre de jours survecu" + p.getDaysSurvived());
->>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
 				Survie.play(p);
 			} else if (x=='4'){
 				tabScore.readFile();

@@ -249,15 +249,8 @@ public class Player {
 			this.hungerLvl = (int) jsonO.get("hungerlvl");
 			this.name = fichier.toString();
 			this.sanityLvl = (int) jsonO.get("sanitylvl");
-<<<<<<< HEAD
 
-			JSONArray inventaire = new JSONArray(fichier);
-
-=======
-			
 			JSONArray inventaire = jsonO.getJSONArray("inventaire");
-			
->>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
 			for (int i = 0; i < inventaire.length(); i++) {
 				JSONObject key = inventaire.getJSONObject(i);
 				int value = key.getInt("quantite");
