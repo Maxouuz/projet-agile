@@ -68,6 +68,7 @@ public class Menu {
 				Player p = new Player(sc.next());
 				p.jSonToString(p.getName());
 				System.out.println("Nombre de jours survecu" + p.getDaysSurvived());
+				Survie.play(p);
 			} else if (x=='4'){
 				tabScore.readFile();
 				System.out.println(ANSI_YELLOW+"Entrer une touche pour sortir"+ANSI_RESET);	
