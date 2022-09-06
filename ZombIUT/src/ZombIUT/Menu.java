@@ -8,15 +8,15 @@ public class Menu {
 	
 	
 	//Color
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_CYAN= "\u001B[36m";
+	public static final String ANSI_RESET = "";
+	public static final String ANSI_RED = "";
+    public static final String ANSI_YELLOW = "";
+    public static final String ANSI_CYAN= "";
     
     
     //Background
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_YELLOW_BACKGROUND = "";
+    public static final String ANSI_BLACK_BACKGROUND = "";
     public static final String ANSI_RED_BACKGROUND
     = "\u001B[41m";
     public static final String ANSI_BLUE_BACKGROUND
@@ -67,7 +67,10 @@ public class Menu {
 				System.out.println(ANSI_RED+"Pseudo :"+ANSI_RESET);
 				Player p = new Player(sc.next());
 				p.jSonToString(p.getName());
+<<<<<<< HEAD
+=======
 				System.out.println("Nombre de jours survecu" + p.getDaysSurvived());
+>>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
 				Survie.play(p);
 			} else if (x=='4'){
 				tabScore.readFile();

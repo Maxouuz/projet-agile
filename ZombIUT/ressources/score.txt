@@ -20,4 +20,8 @@ charles : 7 jours
 charles : 7 jours
 charles : 7 jours
 >>>>>>> 27faec1 (sauvegarde en Json)
+<<<<<<< HEAD
+azer : 6 jours
+=======
 ls : 5 jours
+>>>>>>> 0f5b9df9a0dd28725476d34f7cf8294a5b068a96
