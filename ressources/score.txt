@@ -9,3 +9,4 @@ d : 3 jours
 ben : 7 jours
 b : 5 jours
 ben : 5 jours
+be : 3 jours

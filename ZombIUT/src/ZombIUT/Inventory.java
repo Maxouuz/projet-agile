@@ -62,6 +62,9 @@ public class Inventory {
 		}else {
 			inventory.put(r1,1);
 		}
+		if(inventory.get(r1)==0) {
+			inventory.remove(r1);
+		}
 		
 	}
 
